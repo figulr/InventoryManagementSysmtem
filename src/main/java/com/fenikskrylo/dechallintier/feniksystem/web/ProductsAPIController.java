@@ -23,7 +23,7 @@ public class ProductsAPIController {
 
     }
 
-    @GetMapping("/api/v1/porduct/{id}")
+    @GetMapping("/api/v1/product/{id}")
     public ProductsResponseDto findById(@PathVariable Long id){
         return productsService.findById(id);
     }

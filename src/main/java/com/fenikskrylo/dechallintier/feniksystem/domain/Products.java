@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 @Getter
 @NoArgsConstructor
 @Entity
-public class Products {
+public class Products extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -40,10 +40,10 @@ public class Products {
     @Column(nullable = false)
     private String volumeHeight;
 
-    @Column
-    private LocalDateTime regDt;
-    @Column
-    private LocalDateTime updateDt;
+//    @Column
+//    private LocalDateTime regDt;
+//    @Column
+//    private LocalDateTime updateDt;
 
     @Builder
     public Products(long barcodeId, String productName, String price, String brand, String weight, String volumeShort, String volumeLong, String volumeHeight) {

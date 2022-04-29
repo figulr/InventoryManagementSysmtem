@@ -1,5 +1,6 @@
 package com.fenikskrylo.dechallintier.feniksystem.web;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fenikskrylo.dechallintier.feniksystem.domain.Products;
 import com.fenikskrylo.dechallintier.feniksystem.domain.ProductsRepository;
 import com.fenikskrylo.dechallintier.feniksystem.web.dto.ProductsSaveRequestDto;
@@ -11,16 +12,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.bind.annotation.PutMapping;
 
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -34,6 +35,8 @@ public class ProductsAPIControllerTest {
     @Autowired
     private ProductsRepository productsRepository;
 
+    private MockMvc mvc;
+
     @After
     public void tearDown() throws Exception{
         productsRepository.deleteAll();
@@ -41,7 +44,6 @@ public class ProductsAPIControllerTest {
 
     @Test
     public void Product_등록된다() throws Exception{
-        //given
         //given
         long barcodeId = 111;
         String productName = "제품이름";
@@ -109,17 +111,19 @@ public class ProductsAPIControllerTest {
 
         String url = "http://localhost:"+port+"/api/v1/edit/"+updateId;
 
-        HttpEntity<ProductsUpdateRequestDto> requestEntity = new HttpEntity<>(requestDto);
+        //HttpEntity<ProductsUpdateRequestDto> requestEntity = new HttpEntity<>(requestDto);
 
         // when
-//        ResponseEntity<Long> responseEntity = restTemplate.exchange(url, HttpMethod.PUT, requestEntity, Long.class);
+        //ResponseEntity<Long> responseEntity = restTemplate.exchange(url, HttpMethod.PUT, requestEntity, Long.class);
+        mvc.perform(put(url)
+                .contentType(MediaType.APPLICATION_JSON_UTF8)
+                .content(new ObjectMapper().writeValueAsString(requestDto)))
+                .andExpect(status().isOk());
 
         // then
-//        assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
-//        assertThat(responseEntity.getBody()).isGreaterThan(0L);
-//
-//        List<Products> all = productsRepository.findAll();
-//        assertThat(all.get(0).getPrice()).isEqualTo(expectedPrice);
-//        assertThat(all.get(0).getWeight()).isEqualTo(expectedWeight);
+        List<Products> all = productsRepository.findAll();
+        System.out.println(all);
+        assertThat(all.get(0).getPrice()).isEqualTo(expectedPrice);
+        assertThat(all.get(0).getWeight()).isEqualTo(expectedWeight);
     }
 }
