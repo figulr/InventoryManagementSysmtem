@@ -19,9 +19,7 @@ public class ProductsAPIController {
 
     @PutMapping("/api/v1/edit/{id}")
     public Long update(@PathVariable Long id, @RequestBody ProductsUpdateRequestDto requestDto){
-        return productsService.update(id, requestDto);
-
-    }
+        return productsService.update(id, requestDto);}
 
     @GetMapping("/api/v1/product/{id}")
     public ProductsResponseDto findById(@PathVariable Long id){
