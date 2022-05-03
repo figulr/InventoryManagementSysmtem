@@ -2,12 +2,16 @@ package com.fenikskrylo.dechallintier.feniksystem.service;
 
 import com.fenikskrylo.dechallintier.feniksystem.domain.Products;
 import com.fenikskrylo.dechallintier.feniksystem.domain.ProductsRepository;
+import com.fenikskrylo.dechallintier.feniksystem.web.dto.ProductsListResponseDto;
 import com.fenikskrylo.dechallintier.feniksystem.web.dto.ProductsResponseDto;
 import com.fenikskrylo.dechallintier.feniksystem.web.dto.ProductsSaveRequestDto;
 import com.fenikskrylo.dechallintier.feniksystem.web.dto.ProductsUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
@@ -24,7 +28,8 @@ public class ProductsService {
         Products products =
                 productsRepository.findById(id).orElseThrow(()-> new IllegalArgumentException("제품이 " +
                 "존재하지 않습니다. id = "+id));
-        products.update(requestDto.getPrice(), requestDto.getWeight(), requestDto.getVolumeLong(),
+        products.update(requestDto.getProductName(), requestDto.getPrice(), requestDto.getWeight(),
+                requestDto.getVolumeLong(),
                 requestDto.getVolumeShort(), requestDto.getVolumeHeight());
         return id;
     }
@@ -33,5 +38,12 @@ public class ProductsService {
         Products entity = productsRepository.findById(id).orElseThrow(()-> new IllegalArgumentException("제품이 존재하지 " +
                 "않습니다. id = "+ id));
         return new ProductsResponseDto(entity);
+    }
+
+    @Transactional(readOnly = true)
+    public List<ProductsListResponseDto> findAllDesc(){
+        return productsRepository.findAllDesc().stream()
+                .map(ProductsListResponseDto::new)
+                .collect(Collectors.toList());
     }
 }
