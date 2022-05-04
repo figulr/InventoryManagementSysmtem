@@ -34,6 +34,13 @@ public class ProductsService {
         return id;
     }
 
+    @Transactional
+    public void delete(Long id){
+        Products product = productsRepository.findById(id)
+                .orElseThrow(()-> new IllegalArgumentException("제품이 존재하지 않습니다. i d= "+id));
+        productsRepository.delete(product);
+    }
+
     public ProductsResponseDto findById(Long id){
         Products entity = productsRepository.findById(id).orElseThrow(()-> new IllegalArgumentException("제품이 존재하지 " +
                 "않습니다. id = "+ id));
