@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<!--      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">-->
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -47,9 +48,12 @@
 <!--    </div>-->
 <!--</div>-->
 
-
-
-<div class="col-md-12">
+<!--<div sec:authorize="isAnonymous()">-->
+<div th:if="${userName eq null}">
+    <a href="/oauth2/authorization/naver" class="btn btn-success active" role="button">NAVER Login</a>
+</div>
+<!--<div sec:authorize="isAuthenticated()" class="col-md-12">-->
+<div th:if="${userName}" class="col-md-12">
         <div class="col-md-4">
             <h3>상품 조회</h3>
             <div class="form-group">
