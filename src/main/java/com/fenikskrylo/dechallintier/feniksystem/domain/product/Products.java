@@ -1,5 +1,6 @@
-package com.fenikskrylo.dechallintier.feniksystem.domain;
+package com.fenikskrylo.dechallintier.feniksystem.domain.product;
 
+import com.fenikskrylo.dechallintier.feniksystem.domain.BaseTimeEntity;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

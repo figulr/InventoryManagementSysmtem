@@ -1,7 +1,7 @@
 package com.fenikskrylo.dechallintier.feniksystem.service;
 
-import com.fenikskrylo.dechallintier.feniksystem.domain.Products;
-import com.fenikskrylo.dechallintier.feniksystem.domain.ProductsRepository;
+import com.fenikskrylo.dechallintier.feniksystem.domain.product.Products;
+import com.fenikskrylo.dechallintier.feniksystem.domain.product.ProductsRepository;
 import com.fenikskrylo.dechallintier.feniksystem.web.dto.ProductsListResponseDto;
 import com.fenikskrylo.dechallintier.feniksystem.web.dto.ProductsResponseDto;
 import com.fenikskrylo.dechallintier.feniksystem.web.dto.ProductsSaveRequestDto;

@@ -1,4 +1,4 @@
-package com.fenikskrylo.dechallintier.feniksystem.domain;
+package com.fenikskrylo.dechallintier.feniksystem.domain.product;
 
 import org.junit.After;
 import org.junit.Test;

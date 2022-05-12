@@ -1,6 +1,6 @@
 package com.fenikskrylo.dechallintier.feniksystem.web.dto;
 
-import com.fenikskrylo.dechallintier.feniksystem.domain.Products;
+import com.fenikskrylo.dechallintier.feniksystem.domain.product.Products;
 import lombok.Getter;
 
 import java.time.LocalDateTime;

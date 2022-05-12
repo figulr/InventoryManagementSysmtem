@@ -1,8 +1,8 @@
 package com.fenikskrylo.dechallintier.feniksystem.web;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fenikskrylo.dechallintier.feniksystem.domain.Products;
-import com.fenikskrylo.dechallintier.feniksystem.domain.ProductsRepository;
+import com.fenikskrylo.dechallintier.feniksystem.domain.product.Products;
+import com.fenikskrylo.dechallintier.feniksystem.domain.product.ProductsRepository;
 import com.fenikskrylo.dechallintier.feniksystem.web.dto.ProductsSaveRequestDto;
 import com.fenikskrylo.dechallintier.feniksystem.web.dto.ProductsUpdateRequestDto;
 import org.junit.After;
