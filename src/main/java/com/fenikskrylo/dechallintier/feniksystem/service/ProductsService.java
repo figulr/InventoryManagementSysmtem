@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
@@ -29,6 +30,7 @@ public class ProductsService {
                 productsRepository.findById(id).orElseThrow(()-> new IllegalArgumentException("제품이 " +
                 "존재하지 않습니다. id = "+id));
         products.update(requestDto.getProductName(), requestDto.getPrice(), requestDto.getWeight(),
+                requestDto.getUnit(),
                 requestDto.getVolumeLong(),
                 requestDto.getVolumeShort(), requestDto.getVolumeHeight());
         return id;
@@ -44,6 +46,15 @@ public class ProductsService {
     public ProductsResponseDto findById(Long id){
         Products entity = productsRepository.findById(id).orElseThrow(()-> new IllegalArgumentException("제품이 존재하지 " +
                 "않습니다. id = "+ id));
+        return new ProductsResponseDto(entity);
+    }
+
+    public ProductsResponseDto findByBarcodeId(long barcodeId){
+        Optional<Products> optionalEntity = productsRepository.findByBarcodeId(barcodeId);
+        if(!optionalEntity.isPresent()){
+            new IllegalArgumentException("존재하지 않는 바코드입니다.");
+        }
+        Products entity = optionalEntity.get();
         return new ProductsResponseDto(entity);
     }
 

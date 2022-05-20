@@ -1,0 +1,32 @@
+h1 {
+    margin-top:30px;
+    text-align: center;
+}
+h1 a {
+    color: black;
+}
+h1 a:hover {
+    color: black;
+    text-decoration: none;
+}
+.login-btn{
+    display : flex;
+    margin-top: 30px;
+    justify-content: center;
+}
+.login-btn a{
+    width : 300px
+}
+.header-btn {
+    display: flex;
+    justify-content: right;
+}
+
+.body-content {
+    display: block;
+    margin: 0 auto;
+}
+
+.btn {
+    width: 300px;
+}

@@ -28,11 +28,14 @@ public class Products extends BaseTimeEntity {
     @Column(nullable = false)
     private String brand;
 
-//    @Column(nullable = false)
-//    private PurchaseAt store;
+    @Column(nullable = false)
+    private String store;
 
     @Column(nullable = false)
     private String weight;
+
+    @Column(nullable = false)
+    private String unit;
 
     @Column(nullable = false)
     private String volumeShort;
@@ -42,22 +45,28 @@ public class Products extends BaseTimeEntity {
     private String volumeHeight;
 
     @Builder
-    public Products(long barcodeId, String productName, String price, String brand, String weight, String volumeShort, String volumeLong, String volumeHeight) {
+    public Products(long barcodeId, String productName, String price, String brand, String store, String weight,
+                    String unit,
+                    String volumeShort, String volumeLong, String volumeHeight) {
         this.barcodeId = barcodeId;
         this.productName = productName;
         this.price = price;
         this.brand = brand;
+        this.store = store;
         this.weight = weight;
+        this.unit = unit;
         this.volumeShort = volumeShort;
         this.volumeLong = volumeLong;
         this.volumeHeight = volumeHeight;
     }
 
-    public void update(String productName, String price, String weight, String volumeLong, String volumeShort,
+    public void update(String productName, String price, String weight, String unit, String volumeLong,
+                       String volumeShort,
                        String volumeHeight){
         this.productName = productName;
         this.price = price;
         this.weight = weight;
+        this.unit = unit;
         this.volumeLong = volumeLong;
         this.volumeShort = volumeShort;
         this.volumeHeight = volumeHeight;

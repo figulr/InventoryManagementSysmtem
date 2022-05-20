@@ -5,8 +5,6 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-
 @Getter
 @NoArgsConstructor
 public class ProductsSaveRequestDto {
@@ -14,20 +12,24 @@ public class ProductsSaveRequestDto {
     private String productName;
     private String price;
     private String brand;
-//    private PurchaseAt store;
+    private String store;
     private String weight;
+    private String unit;
     private String volumeShort;
     private String volumeLong;
     private String volumeHeight;
 
     @Builder
-    public ProductsSaveRequestDto(long barcodeId, String productName, String price, String brand, String weight,
+    public ProductsSaveRequestDto(long barcodeId, String productName, String price, String brand,
+                                  String store, String weight, String unit,
                                   String volumeShort, String volumeLong, String volumeHeight){
         this.barcodeId = barcodeId;
         this.productName = productName;
         this.price = price;
         this.brand = brand;
+        this.store = store;
         this.weight = weight;
+        this.unit = unit;
         this.volumeShort = volumeShort;
         this.volumeLong = volumeLong;
         this.volumeHeight = volumeHeight;
@@ -37,12 +39,15 @@ public class ProductsSaveRequestDto {
         return Products.builder()
                 .barcodeId(barcodeId)
                 .productName(productName)
-                .price(price)
                 .brand(brand)
+                .store(store)
+                .price(price)
                 .weight(weight)
+                .unit(unit)
                 .volumeShort(volumeShort)
                 .volumeLong(volumeLong)
                 .volumeHeight(volumeHeight)
                 .build();
+
     }
 }

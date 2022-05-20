@@ -7,32 +7,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>FenikSystem</title>
-
     <!-- Bootstrap -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
-    <!--    <style>-->
-    <!--        body{-->
-    <!--            text-align: center;-->
-    <!--        }-->
-    <!--        h3{-->
-    <!--            margin: 3px 0;-->
-    <!--        }-->
-    <!--        .card {-->
-    <!--            display: block;-->
-    <!--            margin:5px auto;-->
-    <!--            max-width: 800px;-->
-    <!--            min-width: 400px;-->
-    <!--            background-color: orange;-->
-    <!--            border-radius: 10px;-->
-    <!--        }-->
-    <!--    </style>-->
+    <link th:href="@{/css/essential.css}" rel="stylesheet">
 </head>
 <body>
 <!--<div class="header">-->
-<div>
-    <h1><a href="/">FenikSystem</a></h1>
-    <hr>
-</div>
+
 <!--<div class="body">-->
 <!--    <div class="card">-->
 <!--        <div id="title">-->
@@ -47,14 +28,25 @@
 <!--        </div>-->
 <!--    </div>-->
 <!--</div>-->
-
 <!--<div sec:authorize="isAnonymous()">-->
 <div th:if="${userName eq null}">
-    <a href="/oauth2/authorization/naver" class="btn btn-success active" role="button">NAVER Login</a>
+    <div class="header-logo" th:replace="/fragments/header.html :: logo"></div>
+    <div class="login-btn">
+        <a href="/oauth2/authorization/naver" class="btn btn-success active"  role="button">NAVER
+            Login</a>
+    </div>
+
+
 </div>
 <!--<div sec:authorize="isAuthenticated()" class="col-md-12">-->
-<div th:if="${userName}" class="col-md-12">
-        <div class="col-md-4">
+<div th:if="${userName}">
+    <div class="header-logo" th:replace="/fragments/header.html :: logo"></div>
+    <div class="header-btn">
+        <div th:replace="/fragments/header.html :: logout"></div>
+        <hr/>
+    </div>
+    <div class="col-md-12">
+        <div class="col-md-12">
             <h3>상품 조회</h3>
             <div class="form-group">
                 <form>
@@ -80,7 +72,9 @@
             </div>
         </div>
     </div>
+    </div>
 </div>
+
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </body>
