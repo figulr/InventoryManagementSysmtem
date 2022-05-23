@@ -36,6 +36,17 @@ public class ProductsService {
         return id;
     }
 
+    // Price Update
+    @Transactional
+    public Long priceUpdate(Long id, long price){
+        Products product = productsRepository.findById(id).orElseThrow(()-> new IllegalArgumentException("제품이 존재하지 " +
+                "않습니다."));
+        System.out.println(">>>>>>>>"+product);
+        product.update(price);
+        System.out.println("업데이트 완료");
+        return id;
+    }
+
     @Transactional
     public void delete(Long id){
         Products product = productsRepository.findById(id)

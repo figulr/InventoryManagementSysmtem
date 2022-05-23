@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 public class ProductsSaveRequestDto {
     private long barcodeId;
     private String productName;
-    private String price;
+    private long price;
     private String brand;
     private String store;
     private String weight;
@@ -20,7 +20,7 @@ public class ProductsSaveRequestDto {
     private String volumeHeight;
 
     @Builder
-    public ProductsSaveRequestDto(long barcodeId, String productName, String price, String brand,
+    public ProductsSaveRequestDto(long barcodeId, String productName, long price, String brand,
                                   String store, String weight, String unit,
                                   String volumeShort, String volumeLong, String volumeHeight){
         this.barcodeId = barcodeId;

@@ -37,7 +37,23 @@
                 </div>
                 <div class="form-group">
                     <label for="price">가격</label>
-                    <input type="text" class="form-control" id="price" th:value="${product.price}">
+                    <input type="text" class="form-control" id="price" th:value="${product.price}" readonly>
+                </div>
+<!--                <div th:if="${pl.history}" class="form-group">-->
+<!--                    <div th:each="pl : ${priceList}">-->
+<!--                        <p>-->
+<!--                            <span th:text="${pl.updatedPrice}"></span>-->
+<!--                            <span th:text="${pl.createdDate"></span>-->
+<!--                        </p>-->
+<!--                    </div>-->
+<!--                </div>-->
+                <div class="form-group">
+                    <label for="updatedPrice">가격 수정</label>
+                    <input type="number" class="form-control" id="updatedPrice" placeholder="새로운 가격을 입력해주세요.">
+                </div>
+                <div>
+                    <button role="button" class="btn btn-primary" id="btn-price-update">가격 수정</button>
+                    <br>
                 </div>
                 <div class="form-group">
                     <label for="weight">무게</label>
@@ -92,10 +108,9 @@
     </div>
 </div>
 
-
-
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <script src="/js/app/stockRegister.js"></script>
+<script src="/js/app/priceUpdate.js"></script>
 </body>
 </html>

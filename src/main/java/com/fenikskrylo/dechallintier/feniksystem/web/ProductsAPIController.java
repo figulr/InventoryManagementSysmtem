@@ -2,16 +2,11 @@ package com.fenikskrylo.dechallintier.feniksystem.web;
 
 import com.fenikskrylo.dechallintier.feniksystem.config.auth.LoginUser;
 import com.fenikskrylo.dechallintier.feniksystem.config.auth.dto.SessionUser;
-import com.fenikskrylo.dechallintier.feniksystem.domain.user.User;
+import com.fenikskrylo.dechallintier.feniksystem.service.ProductPriceService;
 import com.fenikskrylo.dechallintier.feniksystem.service.ProductStockService;
 import com.fenikskrylo.dechallintier.feniksystem.service.ProductsService;
-import com.fenikskrylo.dechallintier.feniksystem.web.dto.ProductStockUpdateDto;
-import com.fenikskrylo.dechallintier.feniksystem.web.dto.ProductsResponseDto;
-import com.fenikskrylo.dechallintier.feniksystem.web.dto.ProductsSaveRequestDto;
-import com.fenikskrylo.dechallintier.feniksystem.web.dto.ProductsUpdateRequestDto;
+import com.fenikskrylo.dechallintier.feniksystem.web.dto.*;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
@@ -19,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 public class ProductsAPIController {
     private final ProductsService productsService;
     private final ProductStockService productStockService;
-    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+    private final ProductPriceService productPriceService;
 
     // url 모두 동일해도 Mapping 방식이 다르다면 괜찮다.
     @PostMapping("/api/v1/register")
@@ -45,14 +40,20 @@ public class ProductsAPIController {
     // stock manage
     @PostMapping("/api/v1/stock/{barcode}")
     public Long stockSave(@RequestBody ProductStockUpdateDto stockDto, @LoginUser SessionUser user){
-        System.out.println(">>>>>>>>>>>>api 진입");
-//        User principal = (User)authentication.getPrincipal();
-//        System.out.println(">>>>>>>>>>>>유저정보 : "+principal.getName());
-//        stockDto.setName(principal.getName());
-//        stockDto.setName(authentication.getName());
         stockDto.setName(user.getName());
-        System.out.println(user.getName());
         return productStockService.save(stockDto);
     }
 
+    // price manage
+//    @ResponseBody
+    @PostMapping("/api/v1/price/{barcode}")
+    public Long priceUpdate(@RequestBody ProductPriceUpdateDto priceDto, @LoginUser SessionUser user){
+        System.out.println("api 실행");
+//        productsService.priceUpdate(priceDto.getId(), priceDto.getUpdatedPrice());
+        priceDto.setName(user.getName());
+        System.out.println("api 마지막 전");
+        return productPriceService.save(priceDto);
+    }
 }
+
+

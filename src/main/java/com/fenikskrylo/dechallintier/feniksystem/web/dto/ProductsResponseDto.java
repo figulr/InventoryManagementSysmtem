@@ -10,7 +10,7 @@ public class ProductsResponseDto {
     private Long id;
     private long barcodeId;
     private String productName;
-    private String price;
+    private long price;
     private String brand;
     private String store;
     private String weight;

@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ProductsUpdateRequestDto {
     private String productName;
-    private String price;
+    private long price;
     private String weight;
     private String unit;
     private String volumeShort;
@@ -17,7 +17,7 @@ public class ProductsUpdateRequestDto {
     private String volumeHeight;
 
     @Builder
-    public ProductsUpdateRequestDto(String productName, String price, String weight, String unit, String volumeLong,
+    public ProductsUpdateRequestDto(String productName, long price, String weight, String unit, String volumeLong,
                                     String volumeShort,
                                     String volumeHeight){
         this.productName = productName;

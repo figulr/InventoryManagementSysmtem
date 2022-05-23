@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>FenikSystem</title>
+
+    <!-- Bootstrap -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <link th:href="@{/css/essential.css}" rel="stylesheet">
+    <link th:href="@{/css/product.css}" rel="stylesheet">
+</head>
+<body>
+<div>
+    <div class="header-logo" th:replace="/fragments/header.html :: logo"></div>
+    <div class="header-btn">
+        <div th:replace="/fragments/header.html :: logout"></div>
+        <hr>
+    </div>
+</div>
+<div class="body-content">
+    <div class>
+        <div class="col-md-12">
+            <h3>상품 검색</h3>
+            <div class="search-input">
+                <select name="" id="">
+                    <option value="barcode">바코드</option>
+                    <option value="name">제품명</option>
+                    <option value="brand">브랜드</option>
+                </select>
+                <div class="form-group">
+                    <form>
+                        <input type="text" id="bcodeId" placeholder="바코드번호를 입력하세요.">
+                    </form>
+                    <a href="#" role="button" class="btn btn-primary">검색</a>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+    <table class="table table-horizontal table-bordered">
+        <thead class="thead-strong">
+        <tr>
+            <th>id</th>
+            <th>barcode</th>
+            <th>제품이름</th>
+            <th>브랜드</th>
+            <th>가격</th>
+            <th>등록일</th>
+            <th>수정일</th>
+        </tr>
+        </thead>
+        <tbody id="tbody">
+        <tr th:each="x : ${list}">
+            <td th:text="${x.id}">id</td>
+            <td th:text="${x.barcodeId}">barcode</td>
+            <td ><a th:href="'/product/update/'+${x.id}" th:text="${x.productName}">product name</a></td>
+            <td th:text="${x.brand}">brand</td>
+            <td th:text="${x.price}">price</td>
+            <td th:text="${x.createdDate}">created Date</td>
+            <td th:text="${x.modifiedDate}">modified Date</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="/js/app/index.js"></script>
+</body>
+</html>

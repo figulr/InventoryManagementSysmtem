@@ -14,7 +14,7 @@ public class ProductsListResponseDto {
     private String productName;
     private String brand;
     private String store;
-    private String price;
+    private long price;
     private String weight;
     private String unit;
     private String volumeShort;

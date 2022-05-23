@@ -2,10 +2,10 @@ package com.fenikskrylo.dechallintier.feniksystem.web;
 
 import com.fenikskrylo.dechallintier.feniksystem.domain.PurchaseAt;
 import com.fenikskrylo.dechallintier.feniksystem.domain.Unit;
+import com.fenikskrylo.dechallintier.feniksystem.service.ProductPriceService;
 import com.fenikskrylo.dechallintier.feniksystem.service.ProductStockService;
 import com.fenikskrylo.dechallintier.feniksystem.service.ProductsService;
 import com.fenikskrylo.dechallintier.feniksystem.web.dto.ProductStockResponseDto;
-import com.fenikskrylo.dechallintier.feniksystem.web.dto.ProductsListResponseDto;
 import com.fenikskrylo.dechallintier.feniksystem.web.dto.ProductsResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.EnumSet;
+import java.util.List;
 
 @RequiredArgsConstructor
 @Controller
@@ -21,6 +22,7 @@ public class ProductsController {
 
     private final ProductsService productsService;
     private final ProductStockService productStockService;
+    private final ProductPriceService productPriceService;
 
     @GetMapping("/product/register")
     public String productRegister(Model model){
@@ -35,10 +37,17 @@ public class ProductsController {
     public String productDetail(Model model, @PathVariable long barcode){
         ProductsResponseDto dto = productsService.findByBarcodeId(barcode);
         ProductStockResponseDto stockDto = productStockService.latestLog(barcode);
+//        List<ProductPriceResponseDto> priceDto = productPriceService.latestLog(barcode);
         model.addAttribute("product",dto);
         model.addAttribute("stock", stockDto);
+//        model.addAttribute("priceList", priceDto);
         return "/product/detail";
 
+    }
+
+    @GetMapping("/product/search")
+    public String productSearch(){
+        return "/product/seasrch";
     }
 
     @GetMapping("/product/list")
