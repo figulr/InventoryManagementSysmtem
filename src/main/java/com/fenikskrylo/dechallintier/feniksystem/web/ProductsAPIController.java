@@ -2,12 +2,15 @@ package com.fenikskrylo.dechallintier.feniksystem.web;
 
 import com.fenikskrylo.dechallintier.feniksystem.config.auth.LoginUser;
 import com.fenikskrylo.dechallintier.feniksystem.config.auth.dto.SessionUser;
+import com.fenikskrylo.dechallintier.feniksystem.domain.product.Products;
 import com.fenikskrylo.dechallintier.feniksystem.service.ProductPriceService;
 import com.fenikskrylo.dechallintier.feniksystem.service.ProductStockService;
 import com.fenikskrylo.dechallintier.feniksystem.service.ProductsService;
 import com.fenikskrylo.dechallintier.feniksystem.web.dto.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
@@ -16,13 +19,20 @@ public class ProductsAPIController {
     private final ProductStockService productStockService;
     private final ProductPriceService productPriceService;
 
+    @ResponseBody
+    @GetMapping("/api/v1/register/check/{barcode}")
+    public boolean check(@PathVariable long barcode){
+        System.out.println("api 도착");
+        System.out.println(barcode);
+        return productsService.check(barcode);
+    }
     // url 모두 동일해도 Mapping 방식이 다르다면 괜찮다.
     @PostMapping("/api/v1/register")
-    public Long register(@RequestBody ProductsSaveRequestDto requestDto){
+    public boolean register(@RequestBody ProductsSaveRequestDto requestDto){
         return productsService.save(requestDto);
     }
 
-    @PutMapping("/api/v1/edit/{id}")
+    @PutMapping("/api/v1/update/{id}")
     public Long update(@PathVariable Long id, @RequestBody ProductsUpdateRequestDto requestDto){
         return productsService.update(id, requestDto);}
 
@@ -37,6 +47,7 @@ public class ProductsAPIController {
         return productsService.findById(id);
     }
 
+
     // stock manage
     @PostMapping("/api/v1/stock/{barcode}")
     public Long stockSave(@RequestBody ProductStockUpdateDto stockDto, @LoginUser SessionUser user){
@@ -45,15 +56,17 @@ public class ProductsAPIController {
     }
 
     // price manage
-//    @ResponseBody
+    // @ResponseBody
     @PostMapping("/api/v1/price/{barcode}")
     public Long priceUpdate(@RequestBody ProductPriceUpdateDto priceDto, @LoginUser SessionUser user){
         System.out.println("api 실행");
-//        productsService.priceUpdate(priceDto.getId(), priceDto.getUpdatedPrice());
+        productsService.priceUpdate(priceDto.getId(), priceDto.getUpdatedPrice());
         priceDto.setName(user.getName());
         System.out.println("api 마지막 전");
         return productPriceService.save(priceDto);
     }
+
+
 }
 
 

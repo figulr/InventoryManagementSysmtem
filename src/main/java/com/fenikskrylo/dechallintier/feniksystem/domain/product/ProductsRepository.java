@@ -12,4 +12,11 @@ public interface ProductsRepository extends JpaRepository<Products, Long> {
     List<Products> findAllDesc();
 
     Optional<Products> findByBarcodeId(long barcodeId);
+
+//    @Query("SELECT p FROM Products p WHERE p.productName like ?1")
+    Optional<List<Products>> findByBarcodeIdContaining(long barcodeId);
+
+    Optional<List<Products>> findByProductNameContaining(String productName);
+
+    Optional<List<Products>> findByBrandContaining(String brand);
 }

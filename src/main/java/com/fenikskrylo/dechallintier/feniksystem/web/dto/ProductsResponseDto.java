@@ -1,9 +1,9 @@
 package com.fenikskrylo.dechallintier.feniksystem.web.dto;
 
-import com.fenikskrylo.dechallintier.feniksystem.domain.PurchaseAt;
-import com.fenikskrylo.dechallintier.feniksystem.domain.Unit;
 import com.fenikskrylo.dechallintier.feniksystem.domain.product.Products;
 import lombok.Getter;
+
+import java.time.LocalDateTime;
 
 @Getter
 public class ProductsResponseDto {
@@ -18,6 +18,9 @@ public class ProductsResponseDto {
     private String volumeShort;
     private String volumeLong;
     private String volumeHeight;
+    private LocalDateTime createdDate;
+    private LocalDateTime modifiedDate;
+    private boolean registered = true;
 
     public ProductsResponseDto(Products entity){
         this.id = entity.getId();
@@ -31,5 +34,11 @@ public class ProductsResponseDto {
         this.volumeShort = entity.getVolumeShort();
         this.volumeLong = entity.getVolumeLong();
         this.volumeHeight = entity.getVolumeHeight();
+        this.createdDate = entity.getCreatedDate();
+        this.modifiedDate = entity.getModifiedDate();
+    }
+
+    public ProductsResponseDto(boolean result){
+        this.registered = result;
     }
 }

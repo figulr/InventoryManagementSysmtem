@@ -12,78 +12,46 @@
     <link th:href="@{/css/essential.css}" rel="stylesheet">
 </head>
 <body>
-<!--<div class="header">-->
-
-<!--<div class="body">-->
-<!--    <div class="card">-->
-<!--        <div id="title">-->
-<!--            <h3>상품 조회</h3>-->
-<!--        </div>-->
-<!--        <input type="text">-->
-<!--        <button>조회</button>-->
-<!--    </div>-->
-<!--    <div class="card">-->
-<!--        <div>-->
-<!--            <h3>상품등록</h3>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--</div>-->
-<!--<div sec:authorize="isAnonymous()">-->
 <div th:if="${userName eq null}">
     <div class="header-logo" th:replace="/fragments/header.html :: logo"></div>
     <div class="login-btn">
-        <a href="/oauth2/authorization/naver" class="btn btn-success active"  role="button">NAVER
-            Login</a>
+        <a href="/oauth2/authorization/naver" class="btn btn-success active"  role="button">NAVER Login</a>
     </div>
-
-
 </div>
-<!--<div sec:authorize="isAuthenticated()" class="col-md-12">-->
 <div th:if="${userName}">
     <div class="header-logo" th:replace="/fragments/header.html :: logo"></div>
     <div class="header-btn">
         <div th:replace="/fragments/header.html :: logout"></div>
         <hr/>
     </div>
-    <div class="col-md-12">
-        <div class="col-md-12">
+    <div class="body-content">
+        <div class="unit-function">
             <h3>상품 조회</h3>
             <div class="form-group">
                 <form>
-                    <label for="barcodeId">바코드</label>
+                    <label for="barcodeId" >바코드</label>
                     <input type="text" id="barcodeId" placeholder="바코드번호를 입력하세요.">
                 </form>
             </div>
-            <a href="#" role="button" class="btn btn-primary">조회</a>
+            <button role="button" id="btn-search" class="btn btn-primary">조회</button>
         </div>
-    <div class="col-md-12">
-        <div class="row">
-            <div class="col-md-6">
-                <h3>상품등록</h3>
-                <a href="/product/register" role="button" class="btn btn-secondary">등록</a>
-            </div>
+        <div class="unit-function">
+            <h3>상품등록</h3>
+            <a href="/product/register" role="button" class="btn btn-secondary">등록</a>
         </div>
-    </div>
-    <div class="col-md-12">
-        <div class="row">
-            <div class="col-md-6">
-                <h3>상품검색 조회</h3>
-                <a href="/product/search" role="button" class="btn btn-secondary">검색 조회</a>
-            </div>
+        <div class="unit-function">
+                    <h3>상품 상세 검색</h3>
+                    <a href="/product/search" role="button" class="btn btn-secondary">검색</a>
         </div>
-    </div>
-    <div class="col-md-12">
-        <div class="row">
-            <div class="col-md-6">
-                <h3>등록상품리스트</h3>
-                <a href="/product/list" role="button" class="btn btn-secondary">확인</a>
-            </div>
+        <div class="unit-function">
+            <h3>등록상품리스트</h3>
+            <a href="/product/list" role="button" class="btn btn-secondary">확인</a>
         </div>
-    </div>
     </div>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="/js/app/search.js"></script>
 </body>
 </html>

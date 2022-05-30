@@ -20,20 +20,28 @@ public class ProductsService {
     private final ProductsRepository productsRepository;
 
     @Transactional
-    public Long save(ProductsSaveRequestDto requestDto){
-        return productsRepository.save(requestDto.toEntity()).getId();
+    public boolean save(ProductsSaveRequestDto requestDto){
+        long barcodeId = requestDto.getBarcodeId();;
+        Optional<Products> optionalProducts = productsRepository.findByBarcodeId(barcodeId);
+        if(optionalProducts.isPresent()){
+            return false;
+        }
+        productsRepository.save(requestDto.toEntity());
+        return true;
     }
 
     @Transactional
     public Long update(Long id, ProductsUpdateRequestDto requestDto){
         Products products =
                 productsRepository.findById(id).orElseThrow(()-> new IllegalArgumentException("제품이 " +
-                "존재하지 않습니다. id = "+id));
-        products.update(requestDto.getProductName(), requestDto.getPrice(), requestDto.getWeight(),
-                requestDto.getUnit(),
+                "존재하지 않습니다."));
+        products.update(
+                requestDto.getProductName(),
+                requestDto.getWeight(),
                 requestDto.getVolumeLong(),
-                requestDto.getVolumeShort(), requestDto.getVolumeHeight());
-        return id;
+                requestDto.getVolumeShort(),
+                requestDto.getVolumeHeight());
+        return products.getId();
     }
 
     // Price Update
@@ -63,10 +71,47 @@ public class ProductsService {
     public ProductsResponseDto findByBarcodeId(long barcodeId){
         Optional<Products> optionalEntity = productsRepository.findByBarcodeId(barcodeId);
         if(!optionalEntity.isPresent()){
-            new IllegalArgumentException("존재하지 않는 바코드입니다.");
+            System.out.println("Optional 진입");
+            boolean result = false;
+            return new ProductsResponseDto(result);
         }
         Products entity = optionalEntity.get();
         return new ProductsResponseDto(entity);
+    }
+
+
+    @Transactional(readOnly = true)
+    public List<ProductsResponseDto> searchProductName(String productName){
+        System.out.println("repository 진입");
+        Optional<List<Products>> optionalProductsResponseDtoList =
+                productsRepository.findByProductNameContaining(productName);
+        System.out.println("Optional 완료");
+        if(!optionalProductsResponseDtoList.isPresent()){
+            System.out.println("존재안함");
+            throw new IllegalArgumentException("검색 결과가 존재하지 않습니다.");
+        }
+        System.out.println("존재");
+        List<Products> productsList = optionalProductsResponseDtoList.get();
+        System.out.println("불러오기 성공");
+        System.out.println(productsList);
+        return productsList.stream().map(ProductsResponseDto::new).collect(Collectors.toList());
+    }
+
+    @Transactional(readOnly = true)
+    public List<ProductsResponseDto> searchBrand(String brand){
+        System.out.println("repository 진입");
+        Optional<List<Products>> optionalProductsResponseDtoList =
+                productsRepository.findByBrandContaining(brand);
+        System.out.println("Optional 완료");
+        if(!optionalProductsResponseDtoList.isPresent()){
+            System.out.println("존재안함");
+            throw new IllegalArgumentException("검색 결과가 존재하지 않습니다.");
+        }
+        System.out.println("존재");
+        List<Products> productsList = optionalProductsResponseDtoList.get();
+        System.out.println("불러오기 성공");
+        System.out.println(productsList);
+        return productsList.stream().map(ProductsResponseDto::new).collect(Collectors.toList());
     }
 
     @Transactional(readOnly = true)
@@ -74,5 +119,14 @@ public class ProductsService {
         return productsRepository.findAllDesc().stream()
                 .map(ProductsListResponseDto::new)
                 .collect(Collectors.toList());
+    }
+    @Transactional(readOnly = true)
+    public boolean check(long barcode) {
+        System.out.println("check 진입");
+        Optional<Products> optionalProducts = productsRepository.findByBarcodeId(barcode);
+        if(optionalProducts.isPresent()){
+            return false;
+        }
+        return true;
     }
 }

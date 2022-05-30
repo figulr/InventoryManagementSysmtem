@@ -1,5 +1,6 @@
 package com.fenikskrylo.dechallintier.feniksystem.service;
 
+import com.fenikskrylo.dechallintier.feniksystem.domain.price.PriceLog;
 import com.fenikskrylo.dechallintier.feniksystem.web.dto.ProductPriceResponseDto;
 import com.fenikskrylo.dechallintier.feniksystem.web.dto.ProductPriceUpdateDto;
 
@@ -9,5 +10,7 @@ public interface ProductPriceService {
 
     Long save(ProductPriceUpdateDto dto);
 
-//   List<ProductPriceResponseDto> latestLog(long barcode);
+    boolean checkHistory(long barcode);
+
+    List<ProductPriceResponseDto> latestLog(long barcode);
 }

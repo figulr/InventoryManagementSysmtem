@@ -8,5 +8,7 @@ import java.util.Optional;
 
 public interface PriceLogRepository extends JpaRepository<PriceLog, Long> {
 
-//    Optional<List<ProductPriceResponseDto>> findFirstByBarcodeIdOrderByCreatedDateDesc(long barcode);
+    Optional<List<PriceLog>> findTop5ByBarcodeIdOrderByCreatedDateDesc(long barcode);
+
+    Optional<PriceLog> findByBarcodeId(long barcode);
 }

@@ -6,7 +6,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 
 @Getter
 @NoArgsConstructor
@@ -67,6 +66,16 @@ public class Products extends BaseTimeEntity {
         this.price = price;
         this.weight = weight;
         this.unit = unit;
+        this.volumeLong = volumeLong;
+        this.volumeShort = volumeShort;
+        this.volumeHeight = volumeHeight;
+    }
+
+    public void update(String productName, String weight, String volumeLong,
+                       String volumeShort,
+                       String volumeHeight){
+        this.productName = productName;
+        this.weight = weight;
         this.volumeLong = volumeLong;
         this.volumeShort = volumeShort;
         this.volumeHeight = volumeHeight;
