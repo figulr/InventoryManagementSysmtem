@@ -2,21 +2,26 @@
     init : function () {
         var _this = this;
         $('#btn-price-update').on('click', function(){
-            if(confirm("가격을 수정하시겠습니까?")){
-            _this.log();
-        }
-            else {
+            var updatedPrice = $('#updatedPrice').val();
+            if(updatedPrice > 0){
+                if(confirm("가격을 수정하시겠습니까?")) {
+                    _this.log(updatedPrice);
+                } else {
+                    return false;
+                }
+            } else {
+                alert("올바른 가격을 입력해 주세요.")
                 return false;
             }
         });
     },
 
-    log : function() {
+    log : function(updatedPrice) {
         var barcode = $('#barcodeId').val();
         var data = {
             id:$('#id').val(),
             barcodeId: barcode,
-            updatedPrice: $('#updatedPrice').val()
+            updatedPrice: updatedPrice
         };
 
         $.ajax({

@@ -3,24 +3,31 @@
         var _this = this;
         $('#btn-stock-in').on('click', function(){
             var inStock = Number($('#inStock').val());
+            var stockAdd = Number($('#stockAdd').val());
             var stockSub = Number($('#stockSub').val());
-            _this.log(inStock, stockSub);
+
+            if(confirm(stockAdd+"개 입고하시겠습니까?")){
+                _this.log(inStock, stockAdd, stockSub);
+            } else {return false;}
         });
         $('#btn-stock-out').on('click', function(){
             var inStock = Number($('#inStock').val());
             var stockSub = Number($('#stockSub').val());
             if(inStock  >= stockSub) {
-                _this.log(inStock, stockSub);
+                if(confirm(stockSub+"개 출고하시겠습니까?")){
+                    _this.log(inStock, stockSub);
+                } else {
+                    return false;
+                }
             } else {
                 alert("재고가 부족해 출고 명령할 수 없습니다.");
             }
         });
     },
 
-    log : function(inStock, stockSub) {
+    log : function(inStock, stockAdd, stockSub) {
         console.log("함수진입");
         var barcode = $('#barcodeId').val();
-        var stockAdd = Number($('#stockAdd').val());
 
         var data = {
             barcodeId: barcode,
