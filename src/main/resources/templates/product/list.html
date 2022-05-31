@@ -19,6 +19,7 @@
         <hr>
     </div>
 </div>
+<div class="body-content">
 <table class="table table-horizontal table-bordered">
     <thead class="thead-strong">
         <tr>
@@ -35,7 +36,7 @@
         <tr th:each="x : ${list}">
             <td th:text="${x.id}">id</td>
             <td th:text="${x.barcodeId}">barcode</td>
-            <td ><a th:href="'/product/update/'+${x.id}" th:text="${x.productName}">product name</a></td>
+            <td ><a th:href="'/product/detail/'+${x.barcodeId}" th:text="${x.productName}">product name</a></td>
             <td th:text="${x.brand}">brand</td>
             <td th:text="${x.price}">price</td>
             <td th:text="${x.createdDate}">created Date</td>

@@ -10,6 +10,7 @@ import com.fenikskrylo.dechallintier.feniksystem.web.dto.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -59,11 +60,10 @@ public class ProductsAPIController {
     // @ResponseBody
     @PostMapping("/api/v1/price/{barcode}")
     public Long priceUpdate(@RequestBody ProductPriceUpdateDto priceDto, @LoginUser SessionUser user){
-        System.out.println("api 실행");
-        productsService.priceUpdate(priceDto.getId(), priceDto.getUpdatedPrice());
-        priceDto.setName(user.getName());
-        System.out.println("api 마지막 전");
-        return productPriceService.save(priceDto);
+
+        return productsService.priceUpdate(priceDto.getId(), priceDto.getUpdatedPrice(), user, priceDto);
+//        priceDto.setName(user.getName());
+//        return productPriceService.save(priceDto);
     }
 
 

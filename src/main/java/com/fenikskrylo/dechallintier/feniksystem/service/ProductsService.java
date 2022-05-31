@@ -1,11 +1,10 @@
 package com.fenikskrylo.dechallintier.feniksystem.service;
 
+import com.fenikskrylo.dechallintier.feniksystem.config.auth.LoginUser;
+import com.fenikskrylo.dechallintier.feniksystem.config.auth.dto.SessionUser;
 import com.fenikskrylo.dechallintier.feniksystem.domain.product.Products;
 import com.fenikskrylo.dechallintier.feniksystem.domain.product.ProductsRepository;
-import com.fenikskrylo.dechallintier.feniksystem.web.dto.ProductsListResponseDto;
-import com.fenikskrylo.dechallintier.feniksystem.web.dto.ProductsResponseDto;
-import com.fenikskrylo.dechallintier.feniksystem.web.dto.ProductsSaveRequestDto;
-import com.fenikskrylo.dechallintier.feniksystem.web.dto.ProductsUpdateRequestDto;
+import com.fenikskrylo.dechallintier.feniksystem.web.dto.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,6 +17,7 @@ import java.util.stream.Collectors;
 @Service
 public class ProductsService {
     private final ProductsRepository productsRepository;
+    private final ProductPriceService productPriceService;
 
     @Transactional
     public boolean save(ProductsSaveRequestDto requestDto){
@@ -46,12 +46,15 @@ public class ProductsService {
 
     // Price Update
     @Transactional
-    public Long priceUpdate(Long id, long price){
+    public Long priceUpdate(Long id, long price, SessionUser user, ProductPriceUpdateDto priceDto){
         Products product = productsRepository.findById(id).orElseThrow(()-> new IllegalArgumentException("제품이 존재하지 " +
                 "않습니다."));
-        System.out.println(">>>>>>>>"+product);
+        long presentPrice = product.getPrice();
+        priceDto.setName(user.getName());
+        priceDto.setUpdatedPrice(presentPrice);
+        priceDto.setCreatedDate(product.getCreatedDate());
+        productPriceService.save(priceDto);
         product.update(price);
-        System.out.println("업데이트 완료");
         return id;
     }
 
@@ -74,26 +77,21 @@ public class ProductsService {
             System.out.println("Optional 진입");
             boolean result = false;
             return new ProductsResponseDto(result);
+        }else{
+            Products entity = optionalEntity.get();
+            return new ProductsResponseDto(entity);
         }
-        Products entity = optionalEntity.get();
-        return new ProductsResponseDto(entity);
     }
 
 
     @Transactional(readOnly = true)
     public List<ProductsResponseDto> searchProductName(String productName){
-        System.out.println("repository 진입");
         Optional<List<Products>> optionalProductsResponseDtoList =
                 productsRepository.findByProductNameContaining(productName);
-        System.out.println("Optional 완료");
         if(!optionalProductsResponseDtoList.isPresent()){
-            System.out.println("존재안함");
             throw new IllegalArgumentException("검색 결과가 존재하지 않습니다.");
         }
-        System.out.println("존재");
         List<Products> productsList = optionalProductsResponseDtoList.get();
-        System.out.println("불러오기 성공");
-        System.out.println(productsList);
         return productsList.stream().map(ProductsResponseDto::new).collect(Collectors.toList());
     }
 

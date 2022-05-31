@@ -7,16 +7,15 @@ var barcodeChekced = {
 
 $('#barcodeId').on("change keyup paste", function() {
     var currentVal = $('#barcodeId').val();
-    console.log(currentVal);
-    console.log(barcodeChekced.barcode);
     if(currentVal != barcodeChekced.barcode) {
         $('#btn-barcode-check').removeAttr("disabled");
+        if($('p[id = checked-msg]').length>0 == true && barcodeChekced == true) {
+            $('#checked-msg').remove("#checked-msg");
+        }
     } else {
         $('#btn-barcode-check').attr("disabled", "disabled");
-        // document.getElementById('#btn-barcode-check').setAttribute('disabled', 'disabled');
     }
 });
-
 
 var main = {
     init : function () {
@@ -26,7 +25,10 @@ var main = {
         });
         $('#btn-barcode-check').on('click', function(){
             _this.barcodeCheck();
-        })
+        });
+        $('#btn-barcode-reset').on('click', function(){
+            _this.barcodeReset();
+        });
     },
 
     register : function() {
@@ -66,29 +68,55 @@ var main = {
             alert("바코드 중복 확인을 해주세요.");
         }
     },
-
     barcodeCheck : function(){
         var barcode = $('#barcodeId').val();
-        alert(barcode);
         $.ajax({
             type : 'GET',
             url : '/api/v1/register/check/'+barcode,
             dataType : 'json',
             success : function (result) {
-                alert(result);
                 if(result){
                     barcodeChekced.barcode = barcode;
                     barcodeChekced.checked = result;
                     alert("등록 가능한 바코드입니다.")
-                    $('#btn-barcode-check').attr('disabled', 'disabled');
+                    $('#barcodeId').attr('disabled', 'disabled');
+                    $('#unchecked-msg').attr('hidden',true);
+                    $('#checked-msg').removeAttr('hidden');
+                    $('#btn-barcode-check').attr('disabled', 'disabled').removeClass('btn-primary').addClass('btn-secondary');
+                    $('#btn-barcode-reset').removeAttr("disabled").removeClass('btn-secondary').addClass('btn-primary');
+                    $('#productName').removeAttr("disabled");
+                    $('#brand').removeAttr("disabled");
+                    $('#price').removeAttr("disabled");
+                    $('#store').removeAttr("disabled");
+                    $('#weight').removeAttr("disabled");
+                    $('#unit').removeAttr("disabled");
+                    $('#volumeShort').removeAttr("disabled");
+                    $('#volumeLong').removeAttr("disabled");
+                    $('#volumeHeight').removeAttr("disabled");
+                    $('#btn-register').removeAttr('disabled').removeClass('btn-secondary').addClass('btn-primary');
+
+                    // $('.barcode-group').append("<div class=\"form-group\"><button id=\"btn-barcode-reset\"class=\"btn btn-info\"type=\"button\">새로운 바코드 입력하기</button></div>");
                 } else {
                     alert("이미 등록되어 있는 바코드입니다.");
                 }
             },
-            error : function (error){
-                alert(error);
+            error : function (){
+                alert('다시 시도해 주십시오.');
             }
         });
+    },
+    barcodeReset : function(){
+        alert("입력한 바코드 정보를 삭제하시겠습니까?");
+        barcodeChekced.barcode = '';
+        barcodeChekced.checked = false;
+        $('#barcodeId').removeAttr('disabled');
+        $('#barcodeId').empty();
+        $('#unchecked-msg').removeAttr('hidden');
+        $('#checked-msg').attr('hidden', true);
+        $('#btn-barcode-check').removeAttr('disabled').removeClass('btn-secondary').addClass('btn-primary');
+        $('#btn-barcode-reset').attr('disabled', 'disabled').removeClass('btn-primary').addClass('btn-secondary');
+        $('#btn-register').attr('disabled','disabled').removeClass('btn-primary').addClass('btn-secondary');
+
     }
 };
 

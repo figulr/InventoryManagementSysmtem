@@ -41,6 +41,12 @@ h3 {
 
 .btn {
     width: 300px;
+    margin: 3px auto;
+}
+
+.msg {
+    margin: 10px auto 0;
+    font-size: 1.2rem;
 }
 
 .unit-function {
@@ -75,7 +81,7 @@ th {
 td {
     background-color: white;
 }
-.row-gorup {
+.row-group{
     display: flex;
     justify-content: space-between;
 }

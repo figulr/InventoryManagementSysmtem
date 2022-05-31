@@ -2,9 +2,11 @@ package com.fenikskrylo.dechallintier.feniksystem.web.dto;
 
 import com.fenikskrylo.dechallintier.feniksystem.domain.product.Products;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
 
+@Setter
 @Getter
 public class ProductsResponseDto {
     private Long id;
