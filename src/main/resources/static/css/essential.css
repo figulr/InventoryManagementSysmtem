@@ -85,13 +85,13 @@ td {
     display: flex;
     justify-content: space-between;
 }
-.half-form-group{
-    width: 50%;
-    display: grid;
-}
+/*.half-form-group{*/
+/*    width: 30%;*/
+/*    display: grid;*/
+/*}*/
 .half-form-group button{
-    width: 50%;
+    width: 90%;
 }
 .half-form-group .input-register{
-    width: 50%;
+    width: 40%;
 }
