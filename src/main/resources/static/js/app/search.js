@@ -8,17 +8,18 @@ var main = {
 
     search : function() {
         let form = document.createElement('form');
-        var barcode = $('#barcodeId').val();
+        var barcode = $('#search-barcodeId').val();
         if(!barcode){
             alert("바코드를 입력하세요.");
             return false;
         }
+        // if(type!=i)
         form.action = "/product/detail/" + barcode;
         form.method = 'GET';
 
         document.body.append(form);
 
-        form.submit();
+        form.submit()
     }
 }
 
