@@ -9,6 +9,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -89,7 +91,7 @@ public class ProductsService {
         Optional<List<Products>> optionalProductsResponseDtoList =
                 productsRepository.findByProductNameContaining(productName);
         if(!optionalProductsResponseDtoList.isPresent()){
-            throw new IllegalArgumentException("검색 결과가 존재하지 않습니다.");
+            return Collections.emptyList();
         }
         List<Products> productsList = optionalProductsResponseDtoList.get();
         return productsList.stream().map(ProductsResponseDto::new).collect(Collectors.toList());
@@ -97,17 +99,12 @@ public class ProductsService {
 
     @Transactional(readOnly = true)
     public List<ProductsResponseDto> searchBrand(String brand){
-        System.out.println("repository 진입");
         Optional<List<Products>> optionalProductsResponseDtoList =
                 productsRepository.findByBrandContaining(brand);
-        System.out.println("Optional 완료");
         if(!optionalProductsResponseDtoList.isPresent()){
-            System.out.println("존재안함");
-            throw new IllegalArgumentException("검색 결과가 존재하지 않습니다.");
+            return Collections.emptyList();
         }
-        System.out.println("존재");
         List<Products> productsList = optionalProductsResponseDtoList.get();
-        System.out.println("불러오기 성공");
         System.out.println(productsList);
         return productsList.stream().map(ProductsResponseDto::new).collect(Collectors.toList());
     }

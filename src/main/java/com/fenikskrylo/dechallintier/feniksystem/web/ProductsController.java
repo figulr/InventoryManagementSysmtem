@@ -10,14 +10,10 @@ import com.fenikskrylo.dechallintier.feniksystem.web.dto.ProductStockResponseDto
 import com.fenikskrylo.dechallintier.feniksystem.web.dto.ProductsResponseDto;
 import com.fenikskrylo.dechallintier.feniksystem.web.dto.ProductsSearchRequestDto;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.List;
@@ -67,28 +63,21 @@ public class ProductsController {
     }
 
     // search manage
-//    @ResponseBody
     @GetMapping("/product/search.api")
     public String productSearch(ProductsSearchRequestDto dto, Model model){
-        System.out.println(">>>>>> controller 진입");
-        System.out.println(dto);
         List<ProductsResponseDto> productsList = new ArrayList<>();
         switch (dto.getSearchType()){
             case "productName":
-                System.out.println("함수진입1");
                 productsList = productsService.searchProductName(dto.getSearchValue());
-                System.out.println(productsList);
                 break;
             case "brand":
-                System.out.println("함수진입2");
                 productsList = productsService.searchBrand(dto.getSearchValue());
                 System.out.println(productsList);
                 break;
         }
         System.out.println(productsList);
-        System.out.println(">>>>>> controller 끝");
         model.addAttribute("list", productsList);
-        return "/product/search";
+        return "/product/search-result";
     }
 
 
