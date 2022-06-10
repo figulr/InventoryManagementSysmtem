@@ -28,7 +28,7 @@ public class ProductsRepositoryTest {
         //given
         long barcodeId = 111;
         String productName = "제품이름";
-        String price = "111";
+        long price = 111;
         String brand = "브랜드이름";
         String weight = "111";
         String volumeShort = "111";
@@ -69,7 +69,7 @@ public class ProductsRepositoryTest {
                         .barcodeId(111)
                         .productName("이름")
                         .brand("브랜드")
-                        .price("1111")
+                        .price(1111)
                         .weight("111")
                         .volumeLong("111")
                         .volumeShort("111")
