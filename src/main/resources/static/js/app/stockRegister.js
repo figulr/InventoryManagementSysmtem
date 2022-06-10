@@ -12,10 +12,11 @@
         });
         $('#btn-stock-out').on('click', function(){
             var inStock = Number($('#inStock').val());
+            var stockAdd = Number($('#stockAdd').val());
             var stockSub = Number($('#stockSub').val());
             if(inStock  >= stockSub) {
                 if(confirm(stockSub+"개 출고하시겠습니까?")){
-                    _this.log(inStock, stockSub);
+                    _this.log(inStock, stockAdd, stockSub);
                 } else {
                     return false;
                 }

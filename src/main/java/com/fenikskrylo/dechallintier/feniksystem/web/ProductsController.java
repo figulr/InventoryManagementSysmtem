@@ -87,6 +87,13 @@ public class ProductsController {
         return "/product/list";
     }
 
+    // 재고리스트
+    @GetMapping("/product/in-stock")
+    public String productStockList(Model model){
+        model.addAttribute("list", productStockService.stockList());
+        return "/product/in-stock";
+    }
+
     @GetMapping("/product/update/{id}")
     public String productEdit(@PathVariable Long id, Model model){
         ProductsResponseDto dto = productsService.findById(id);

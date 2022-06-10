@@ -20,6 +20,7 @@ import java.util.stream.Collectors;
 public class ProductsService {
     private final ProductsRepository productsRepository;
     private final ProductPriceService productPriceService;
+    private final ProductStockService productStockService;
 
     @Transactional
     public boolean save(ProductsSaveRequestDto requestDto){
@@ -124,4 +125,5 @@ public class ProductsService {
         }
         return true;
     }
+
 }
