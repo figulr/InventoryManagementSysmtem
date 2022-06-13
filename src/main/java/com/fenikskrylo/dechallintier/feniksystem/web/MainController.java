@@ -20,6 +20,6 @@ public class MainController {
             model.addAttribute("userName", user.getName());
         }
 
-        return "/index";
+        return "index";
     }
 }
