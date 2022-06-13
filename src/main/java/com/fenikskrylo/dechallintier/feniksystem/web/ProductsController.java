@@ -32,7 +32,7 @@ public class ProductsController {
         EnumSet<Unit> unit = EnumSet.allOf(Unit.class);
         model.addAttribute("list", list);
         model.addAttribute("unit", unit);
-        return "/product/register";
+        return "product/register";
     }
 
     @GetMapping("/product/detail/{barcode}")
@@ -53,13 +53,13 @@ public class ProductsController {
         model.addAttribute("product",dto);
         model.addAttribute("stock", stockDto);
 
-        return "/product/detail";
+        return "product/detail";
 
     }
 
     @GetMapping("/product/search")
     public String searchPage(){
-        return "/product/search";
+        return "product/search";
     }
 
     // search manage
@@ -77,21 +77,21 @@ public class ProductsController {
         }
         System.out.println(productsList);
         model.addAttribute("list", productsList);
-        return "/product/search-result";
+        return "product/search-result";
     }
 
 
     @GetMapping("/product/list")
     public String productList(Model model){
         model.addAttribute("list", productsService.findAllDesc());
-        return "/product/list";
+        return "product/list";
     }
 
     // 재고리스트
     @GetMapping("/product/in-stock")
     public String productStockList(Model model){
         model.addAttribute("list", productStockService.stockList());
-        return "/product/in-stock";
+        return "product/in-stock";
     }
 
     @GetMapping("/product/update/{id}")
@@ -99,6 +99,6 @@ public class ProductsController {
         ProductsResponseDto dto = productsService.findById(id);
         System.out.println(dto);
         model.addAttribute("product", dto);
-        return "/product/update";
+        return "product/update";
     }
 }

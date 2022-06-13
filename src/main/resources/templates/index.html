@@ -13,15 +13,15 @@
 </head>
 <body>
 <div th:if="${userName eq null}">
-    <div class="header-logo" th:replace="/fragments/header.html :: logo"></div>
+    <div class="header-logo" th:replace="fragments/header.html :: logo"></div>
     <div class="login-btn">
         <a href="/oauth2/authorization/naver" class="btn btn-success active"  role="button">NAVER Login</a>
     </div>
 </div>
 <div th:if="${userName}">
-    <div class="header-logo" th:replace="/fragments/header.html :: logo"></div>
+    <div class="header-logo" th:replace="fragments/header.html :: logo"></div>
     <div class="header-btn">
-        <div th:replace="/fragments/header.html :: logout"></div>
+        <div th:replace="fragments/header.html :: logout"></div>
         <hr/>
     </div>
     <div class="body-content">
