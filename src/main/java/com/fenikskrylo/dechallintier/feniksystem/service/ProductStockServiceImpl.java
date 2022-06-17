@@ -86,7 +86,8 @@ public class ProductStockServiceImpl implements ProductStockService {
                         Products products = optionalProducts.get();
                         System.out.println("재고 상품 리스트에 올라간다.");
                         String productName = products.getProductName();
-                        ProductStockResponseDto dto = new ProductStockResponseDto(stock, productName);
+                        String brand = products.getBrand();
+                        ProductStockResponseDto dto = new ProductStockResponseDto(stock, productName, brand);
                         responseDtos.set(j, dto);
                     } else{
                         // 아니면 이번 건 패스
@@ -99,7 +100,8 @@ public class ProductStockServiceImpl implements ProductStockService {
                     Products products = optionalProducts.get();
                     System.out.println("재고 상품 리스트에 올라간다.");
                     String productName = products.getProductName();
-                    ProductStockResponseDto dto = new ProductStockResponseDto(stock, productName);
+                    String brand = products.getBrand();
+                    ProductStockResponseDto dto = new ProductStockResponseDto(stock, productName, brand);
                     responseDtos.add(dto);
                 }
             }

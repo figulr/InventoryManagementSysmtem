@@ -13,11 +13,13 @@ public class ProductStockResponseDto {
     private int stockSub;
     private long barcodeId;
     private String name;
+    private String brand;
     private String productName;
 
-    public ProductStockResponseDto(StockLog stockLog, String productName){
+    public ProductStockResponseDto(StockLog stockLog, String productName, String brand){
         this.barcodeId = stockLog.getBarcodeId();
         this.productName = productName;
         this.inStock = stockLog.getInStock();
+        this.brand = brand;
     }
 }

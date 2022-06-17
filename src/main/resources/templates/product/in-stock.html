@@ -24,6 +24,7 @@
     <thead class="thead-strong">
         <tr>
             <th>barcode</th>
+            <th>브랜드</th>
             <th>제품명</th>
             <th>재고</th>
         </tr>
@@ -31,6 +32,7 @@
     <tbody id="tbody">
         <tr th:each="x : ${list}">
             <td th:text="${x.barcodeId}">barcode</td>
+            <td th:text="${x.brand}">brand</td>
             <td ><a th:href="'/product/detail/'+${x.barcodeId}" th:text="${x.productName}">product name</a></td>
             <td th:text="${x.inStock}"></td>
         </tr>
