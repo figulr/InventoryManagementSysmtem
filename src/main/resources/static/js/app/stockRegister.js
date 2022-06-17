@@ -35,6 +35,7 @@
             inStock:inStock+stockAdd-stockSub,
             stockAdd:stockAdd,
             stockSub:stockSub,
+            name:$('#user').val()
         };
 
         $.ajax({

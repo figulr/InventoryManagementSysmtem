@@ -49,17 +49,24 @@ public class ProductsAPIController {
 
     // stock manage
     @PostMapping("/api/v1/stock/{barcode}")
-    public Long stockSave(@RequestBody ProductStockUpdateDto stockDto, @LoginUser SessionUser user){
-        stockDto.setName(user.getName());
+    public Long stockSave(@RequestBody ProductStockUpdateDto stockDto
+//            , @LoginUser SessionUser user
+    ){
+//        stockDto.setName(user.getName());
+        stockDto.setName(stockDto.getName());
         return productStockService.save(stockDto);
     }
 
     // price manage
     // @ResponseBody
     @PostMapping("/api/v1/price/{barcode}")
-    public Long priceUpdate(@RequestBody ProductPriceUpdateDto priceDto, @LoginUser SessionUser user){
+    public Long priceUpdate(@RequestBody ProductPriceUpdateDto priceDto
+//            , @LoginUser SessionUser user
+    ){
 
-        return productsService.priceUpdate(priceDto.getId(), priceDto.getUpdatedPrice(), user, priceDto);
+        return productsService.priceUpdate(priceDto.getId(), priceDto.getUpdatedPrice(), priceDto.getName(),
+//                user,
+                priceDto);
 //        priceDto.setName(user.getName());
 //        return productPriceService.save(priceDto);
     }

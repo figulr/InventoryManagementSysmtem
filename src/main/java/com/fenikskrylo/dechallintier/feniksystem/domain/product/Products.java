@@ -36,11 +36,11 @@ public class Products extends BaseTimeEntity {
     @Column(nullable = false)
     private String unit;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String volumeShort;
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String volumeLong;
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String volumeHeight;
 
     @Builder

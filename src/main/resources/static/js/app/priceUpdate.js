@@ -20,6 +20,7 @@
         var barcode = $('#barcodeId').val();
         var data = {
             id:$('#id').val(),
+            name:$('#user').val(),
             barcodeId: barcode,
             updatedPrice: updatedPrice
         };

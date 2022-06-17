@@ -49,11 +49,15 @@ public class ProductsService {
 
     // Price Update
     @Transactional
-    public Long priceUpdate(Long id, long price, SessionUser user, ProductPriceUpdateDto priceDto){
+    public Long priceUpdate(Long id, long price,
+//                            SessionUser user,
+                            String name,
+                            ProductPriceUpdateDto priceDto){
         Products product = productsRepository.findById(id).orElseThrow(()-> new IllegalArgumentException("제품이 존재하지 " +
                 "않습니다."));
         long presentPrice = product.getPrice();
-        priceDto.setName(user.getName());
+//        priceDto.setName(user.getName());
+        priceDto.setName(name);
         priceDto.setUpdatedPrice(presentPrice);
         priceDto.setCreatedDate(product.getCreatedDate());
         productPriceService.save(priceDto);
