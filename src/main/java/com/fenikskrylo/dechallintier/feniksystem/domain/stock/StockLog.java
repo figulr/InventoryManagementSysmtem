@@ -15,7 +15,7 @@ import javax.persistence.*;
 @Entity
 public class StockLog extends NewTimeEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long stockId;
 
     @Column

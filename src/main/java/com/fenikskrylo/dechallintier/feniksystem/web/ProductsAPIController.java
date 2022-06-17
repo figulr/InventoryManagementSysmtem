@@ -23,8 +23,6 @@ public class ProductsAPIController {
     @ResponseBody
     @GetMapping("/api/v1/register/check/{barcode}")
     public boolean check(@PathVariable long barcode){
-        System.out.println("api 도착");
-        System.out.println(barcode);
         return productsService.check(barcode);
     }
     // url 모두 동일해도 Mapping 방식이 다르다면 괜찮다.

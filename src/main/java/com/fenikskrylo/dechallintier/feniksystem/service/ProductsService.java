@@ -24,7 +24,7 @@ public class ProductsService {
 
     @Transactional
     public boolean save(ProductsSaveRequestDto requestDto){
-        long barcodeId = requestDto.getBarcodeId();;
+        long barcodeId = requestDto.getBarcodeId();
         Optional<Products> optionalProducts = productsRepository.findByBarcodeId(barcodeId);
         if(optionalProducts.isPresent()){
             return false;
