@@ -31,7 +31,7 @@
             dataType : 'json',
             contentType : 'application/json; charset=utf-8',
             data : JSON.stringify(data)
-        }).always(function (){
+        }).done(function (){
             console.log("response 받음");
             alert('가격 수정을 완료했습니다. 제품 정보를 확인하시겠습니까?');
             window.location.href='/product/detail/'+barcode;
