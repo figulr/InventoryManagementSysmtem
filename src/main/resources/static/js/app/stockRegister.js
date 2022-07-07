@@ -4,7 +4,7 @@
         $('#btn-stock-in').on('click', function(){
             var inStock = Number($('#inStock').val());
             var stockAdd = Number($('#stockAdd').val());
-            var stockSub = Number($('#stockSub').val());
+            var stockSub = 0;
 
             if(confirm(stockAdd+"개 입고하시겠습니까?")){
                 _this.log(inStock, stockAdd, stockSub);
@@ -12,7 +12,7 @@
         });
         $('#btn-stock-out').on('click', function(){
             var inStock = Number($('#inStock').val());
-            var stockAdd = Number($('#stockAdd').val());
+            var stockAdd = 0;
             var stockSub = Number($('#stockSub').val());
             if(inStock  >= stockSub) {
                 if(confirm(stockSub+"개 출고하시겠습니까?")){
