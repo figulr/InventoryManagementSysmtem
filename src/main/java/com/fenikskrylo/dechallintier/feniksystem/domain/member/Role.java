@@ -1,4 +1,4 @@
-package com.fenikskrylo.dechallintier.feniksystem.domain.user;
+package com.fenikskrylo.dechallintier.feniksystem.domain.member;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -7,8 +7,8 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public enum Role {
 
-    GUEST("ROLE_GEST", "손님"),
-    USER("ROLE_USER", "관리자");
+    GUEST("GUEST", "손님"),
+    USER("USER", "관리자");
 
     private final String key;
     private final String title;

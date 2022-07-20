@@ -1,6 +1,6 @@
 package com.fenikskrylo.dechallintier.feniksystem.config.auth.dto;
 
-import com.fenikskrylo.dechallintier.feniksystem.domain.user.User;
+import com.fenikskrylo.dechallintier.feniksystem.domain.member.Member;
 import lombok.Getter;
 
 import java.io.Serializable;
@@ -10,8 +10,8 @@ public class SessionUser implements Serializable {
     private String name;
     private String email;
 
-    public SessionUser(User user){
-        this.name = user.getName();
-        this.email = user.getEmail();
+    public SessionUser(Member member){
+        this.name = member.getName();
+        this.email = member.getEmail();
     }
 }

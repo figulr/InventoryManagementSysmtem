@@ -1,5 +1,7 @@
 package com.fenikskrylo.dechallintier.feniksystem.web;
 
+import com.fenikskrylo.dechallintier.feniksystem.config.auth.LoginUser;
+import com.fenikskrylo.dechallintier.feniksystem.config.auth.dto.SessionUser;
 import com.fenikskrylo.dechallintier.feniksystem.domain.PurchaseAt;
 import com.fenikskrylo.dechallintier.feniksystem.domain.Unit;
 import com.fenikskrylo.dechallintier.feniksystem.service.ProductPriceService;

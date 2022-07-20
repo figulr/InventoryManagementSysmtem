@@ -1,7 +1,5 @@
 package com.fenikskrylo.dechallintier.feniksystem.web.dto;
 
-import com.fenikskrylo.dechallintier.feniksystem.domain.product.Products;
-import com.fenikskrylo.dechallintier.feniksystem.domain.user.User;
 import lombok.*;
 
 @AllArgsConstructor
