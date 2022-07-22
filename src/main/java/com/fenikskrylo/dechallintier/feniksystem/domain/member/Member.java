@@ -39,8 +39,8 @@ public class Member extends BaseTimeEntity {
         Member member = new Member();
         member.setEmail(userFormDto.getEmail());
         member.setName(userFormDto.getName());
-        String password = passwordEncoder.encode(userFormDto.getPassword());
-        //String password = BCrypt.hashpw(userFormDto.getPassword(), BCrypt.gensalt());
+//        String password = passwordEncoder.encode(userFormDto.getPassword());
+        String password = BCrypt.hashpw(userFormDto.getPassword(), BCrypt.gensalt());
         member.setPassword(password);
         member.setRole(Role.GUEST);
         return member;

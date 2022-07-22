@@ -9,7 +9,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -50,13 +49,12 @@ public class ProductsService {
     // Price Update
     @Transactional
     public Long priceUpdate(Long id, long price,
-//                            SessionUser user,
+//                            @LoginUser  SessionUser user,
                             String name,
                             ProductPriceUpdateDto priceDto){
         Products product = productsRepository.findById(id).orElseThrow(()-> new IllegalArgumentException("제품이 존재하지 " +
                 "않습니다."));
         long presentPrice = product.getPrice();
-//        priceDto.setName(user.getName());
         priceDto.setName(name);
         priceDto.setUpdatedPrice(presentPrice);
         priceDto.setCreatedDate(product.getCreatedDate());

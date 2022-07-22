@@ -37,16 +37,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception{
         http
                 .csrf().disable()
-//                .headers().frameOptions().disable()
-//                .and()
+                // h2 이용을 위해 추가
+                .headers().frameOptions().disable()
+                .and()
                 .authorizeRequests()
-                .antMatchers( "/css/**", "/images/**", "/js/**","/h2-console/**", "/profile"
-                            ,"/api/v1/**","/","/auth/register")
+                .antMatchers( "/css/**", "/images/**", "/js/**", "/h2-console/**", "/profile"
+                            ,"/api/v1/**","/auth/register")
                 .permitAll()
-//                .antMatchers("/product/**").hasRole(Role.USER.name())
-        ;
+                .antMatchers("/product/**").hasRole(Role.GUEST.name())
 //                .anyRequest().authenticated()
-//                .and()
+        ;
 
         http
                 .formLogin()

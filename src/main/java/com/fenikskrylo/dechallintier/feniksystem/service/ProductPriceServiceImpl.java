@@ -21,20 +21,18 @@ public class ProductPriceServiceImpl implements ProductPriceService{
 
     @Override
     public Long save(ProductPriceUpdateDto dto) {
-        System.out.println("save 시작");
         PriceLog priceLog = PriceLog.builder()
                 .barcodeId(dto.getBarcodeId())
                 .updatedPrice(dto.getUpdatedPrice())
                 .name(dto.getName())
                 .build();
         priceLogRepository.save(priceLog);
-        System.out.println("save 완료");
         return priceLog.getPriceId();
     }
 
     @Override
     public boolean checkHistory(long barcode) {
-        Optional<PriceLog> optionalPriceLog = priceLogRepository.findByBarcodeId(barcode);
+        Optional<PriceLog> optionalPriceLog = priceLogRepository.findTopByBarcodeId(barcode);
         if(!optionalPriceLog.isPresent()){
             return false;
         }

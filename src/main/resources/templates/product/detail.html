@@ -13,8 +13,9 @@
 <body>
 <div class="header-logo" th:replace="fragments/header.html :: logo"></div>
 <div class="header-btn">
-    <div th:replace="fragments/header.html :: logout"></div>
-    <hr/>
+    <span th:text="${userName}"></span>
+    <span th:replace="fragments/header.html :: logout"></span>
+    <hr>
 </div>
 
 <div class="body-content" th:if="${product.registered eq false}">
@@ -84,15 +85,6 @@
             <br>
         </div>
         <hr>
-            <h4>관리자</h4>
-        <div class="form-group">
-            <span class="label">관리자</span>
-            <select class="input-register" id="user">
-                <option value="노진희">노진희</option>
-                <option value="노진용">노진용</option>
-            </select>
-        </div>
-        <hr>
                 <h3>가격 정보</h3>
                 <div class="form-group">
                     <span class="label">현재 가격</span>
@@ -100,7 +92,7 @@
                 </div>
                 <div th:if="${priceList}"class="form-group">
                     <span class="label">가격 이력</span>
-                    <div class="input-register"  th:each="pl : ${priceList}">
+                    <div class="input-register"  >
                         <table style="width: 100%;">
                             <thead>
                                 <tr>
@@ -108,7 +100,7 @@
                                     <th style="width: 50%">등록날짜</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody th:each="pl : ${priceList}">
                                 <tr>
                                     <td th:text="${pl.updatedPrice}"></td>
                                     <td th:text="${pl.createdDate}"></td>

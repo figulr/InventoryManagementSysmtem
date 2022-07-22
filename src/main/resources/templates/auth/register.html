@@ -15,10 +15,6 @@
 
 <div>
     <div class="header-logo" th:replace="fragments/header.html :: logo"></div>
-    <div class="header-btn">
-        <div th:replace="fragments/header.html :: logout"></div>
-        <hr>
-    </div>
 </div>
 
 <div class="body-content">
@@ -58,6 +54,8 @@
             <input type="password" class="input-register" id="rePassword" disabled="disabled" placeholder="비밀번호를 한 번더 입력하세요.">
         </div>
         <button id="btn-register" disabled="disabled" class="btn btn-secondary" type="button">회원가입</button>
+        <hr>
+        <a class="btn btn-primary" href="/auth/login">로그인 하러가기</a>
     </div>
 </div>
 </div>

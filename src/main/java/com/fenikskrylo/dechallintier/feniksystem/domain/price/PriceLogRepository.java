@@ -10,5 +10,5 @@ public interface PriceLogRepository extends JpaRepository<PriceLog, Long> {
 
     Optional<List<PriceLog>> findTop5ByBarcodeIdOrderByCreatedDateDesc(long barcode);
 
-    Optional<PriceLog> findByBarcodeId(long barcode);
+    Optional<PriceLog> findTopByBarcodeId(long barcode);
 }

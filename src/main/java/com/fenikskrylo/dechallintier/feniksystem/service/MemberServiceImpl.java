@@ -65,4 +65,14 @@ public class MemberServiceImpl implements MemberService {
                 .build();
     }
 
+    @Override
+    public String getName(String email){
+        Member member = memberRepository.findByEmail(email);
+        if(member == null){
+            throw new UsernameNotFoundException("회원 정보가 존재하지 않습니다.");
+        }
+
+        return member.getName();
+    }
+
 }

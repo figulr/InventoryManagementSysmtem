@@ -2,16 +2,12 @@ package com.fenikskrylo.dechallintier.feniksystem.web;
 
 import com.fenikskrylo.dechallintier.feniksystem.config.auth.LoginUser;
 import com.fenikskrylo.dechallintier.feniksystem.config.auth.dto.SessionUser;
-import com.fenikskrylo.dechallintier.feniksystem.domain.product.Products;
 import com.fenikskrylo.dechallintier.feniksystem.service.ProductPriceService;
 import com.fenikskrylo.dechallintier.feniksystem.service.ProductStockService;
 import com.fenikskrylo.dechallintier.feniksystem.service.ProductsService;
 import com.fenikskrylo.dechallintier.feniksystem.web.dto.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-
-
-import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
@@ -49,26 +45,15 @@ public class ProductsAPIController {
 
     // stock manage
     @PostMapping("/api/v1/stock/{barcode}")
-    public Long stockSave(@RequestBody ProductStockUpdateDto stockDto
-//            , @LoginUser SessionUser user
-    ){
-//        stockDto.setName(user.getName());
-        stockDto.setName(stockDto.getName());
+    public Long stockSave(@RequestBody ProductStockUpdateDto stockDto){
         return productStockService.save(stockDto);
     }
 
     // price manage
     // @ResponseBody
     @PostMapping("/api/v1/price/{barcode}")
-    public Long priceUpdate(@RequestBody ProductPriceUpdateDto priceDto
-//            , @LoginUser SessionUser user
-    ){
-
-        return productsService.priceUpdate(priceDto.getId(), priceDto.getUpdatedPrice(), priceDto.getName(),
-//                user,
-                priceDto);
-//        priceDto.setName(user.getName());
-//        return productPriceService.save(priceDto);
+    public Long priceUpdate(@RequestBody ProductPriceUpdateDto priceDto){
+        return productsService.priceUpdate(priceDto.getId(), priceDto.getUpdatedPrice(), priceDto.getName(), priceDto);
     }
 
 

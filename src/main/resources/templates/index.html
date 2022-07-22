@@ -21,8 +21,9 @@
 <!--<div th:if="${userName}">-->
     <div>
     <div class="header-logo" th:replace="fragments/header.html :: logo"></div>
-    <div class="header-btn">
-        <div th:replace="fragments/header.html :: logout"></div>
+    <div class="header-btn" th:if="${userName}">
+        <span th:text="${userName}"></span>
+        <span th:replace="fragments/header.html :: logout"></span>
         <hr/>
     </div>
     <div class="body-content">

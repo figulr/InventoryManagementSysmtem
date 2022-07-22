@@ -82,7 +82,7 @@ var main = {
             }).done(function (result) {
                 if(result) {
                     alert('회원 등록이 완료되었습니다.');
-                    window.location.href = '/';
+                    window.location.href = '/auth/login';
                 // @@@ 로그인 페이지로 이동 수정입
                 } else {
                     alert('회원 정보를 확인해 주세요.');

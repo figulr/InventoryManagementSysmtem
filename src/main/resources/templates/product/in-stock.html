@@ -33,7 +33,7 @@
         <tr th:each="x : ${list}">
             <td th:text="${x.barcodeId}">barcode</td>
             <td th:text="${x.brand}">brand</td>
-            <td ><a th:href="'/product/detail/'+${x.barcodeId}" th:text="${x.productName}">product name</a></td>
+            <td ><a th:href="'/product/detail/'+${x.barcodeId}" th:text="${x.productName}" target='_blank'>product name</a></td>
             <td th:text="${x.inStock}"></td>
         </tr>
     </tbody>

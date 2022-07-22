@@ -10,6 +10,8 @@ public interface MemberService extends UserDetailsService {
 
     boolean emailCheck(String email);
 
+    String getName(String email);
+
 
 
 }
