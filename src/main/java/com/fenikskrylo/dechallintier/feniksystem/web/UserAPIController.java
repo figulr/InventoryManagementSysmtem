@@ -14,13 +14,13 @@ public class UserAPIController {
     private final MemberService memberService;
     private final PasswordEncoder passwordEncoder;
 
-    @GetMapping("/api/v1/user/check/{email}")
+    @GetMapping("/api/v0/user/check/{email}")
     public boolean emailCheck(@PathVariable String email){
         boolean result = memberService.emailCheck(email);
         return result;
     }
 
-    @PostMapping("/api/v1/user/register")
+    @PostMapping("/api/v0/user/register")
     public boolean userRegisterSubmit(@RequestBody UserFormDto dto){
         System.out.println("진입");
         Member member = Member.createUser(dto, passwordEncoder);

@@ -75,7 +75,7 @@ var main = {
             console.log("ajax 시작")
             $.ajax({
                 type: 'POST',
-                url: '/api/v1/user/register',
+                url: '/api/v0/user/register',
                 dataType: 'json',
                 contentType: 'application/json; charset=utf-8',
                 data: JSON.stringify(data)
@@ -109,7 +109,7 @@ var main = {
             } else {
                 $.ajax({
                     type : 'GET',
-                    url : '/api/v1/user/check/'+email,
+                    url : '/api/v0/user/check/'+email,
                     dataType : 'json',
                     success : function (result) {
                         if(result){

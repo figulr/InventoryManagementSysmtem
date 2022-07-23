@@ -13,7 +13,7 @@
 <body>
 <div class="header-logo" th:replace="fragments/header.html :: logo"></div>
 <div class="header-btn">
-    <span th:text="${userName}"></span>
+    <span th:text="${userName}" id="user"></span>
     <span th:replace="fragments/header.html :: logout"></span>
     <hr>
 </div>
@@ -126,12 +126,12 @@
                     <div class="row-group">
                         <div class="half-form-group">
                             <p class="label stock-text">입고</p>
-                            <input type="number" min="1" class="input-register" id="stockAdd" placeholder="1">
+                            <input type="number" min="1" value="1" class="input-register" id="stockAdd">
                             <button role="button" class="btn btn-primary" id="btn-stock-in">입고 확인</button>
                         </div>
                         <div class="half-form-group">
                             <p class="label stock-text">출고</p>
-                            <input type="number" min="1" class="input-register" id="stockSub" placeholder="1">
+                            <input type="number" min="1" class="input-register" id="stockSub" value="1">
                             <button role="button" class="btn btn-danger" id="btn-stock-out">출고 확인</button>
                         </div>
                     </div>

@@ -4,7 +4,6 @@
         $('#btn-price-update').on('click', function(){
             var currentPrice = $('#price').val();
             var updatedPrice = $('#updatedPrice').val();
-            alert(currentPrice);
             if(updatedPrice > 0 && currentPrice != updatedPrice){
                 if(confirm("가격을 수정하시겠습니까?")) {
                     _this.log(updatedPrice);

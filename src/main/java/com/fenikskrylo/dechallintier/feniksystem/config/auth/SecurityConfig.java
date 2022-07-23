@@ -41,10 +41,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //                .headers().frameOptions().disable()
 //                .and()
                 .authorizeRequests()
-                .antMatchers( "/css/**", "/images/**", "/js/**", "/h2-console/**", "/profile"
-                            ,"/api/v1/**","/auth/register")
+                .antMatchers( "/css/**", "/images/**", "/js/**", "/h2-console/**", "/profile",
+                            "/api/v0/**","/auth/register")
                 .permitAll()
-                .antMatchers("/product/**").hasRole(Role.GUEST.name())
+                .antMatchers("/product/**","/api/v1/**").hasRole(Role.GUEST.name())
 //                .anyRequest().authenticated()
         ;
 

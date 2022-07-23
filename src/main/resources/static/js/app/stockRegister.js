@@ -5,29 +5,37 @@
             var inStock = Number($('#inStock').val());
             var stockAdd = Number($('#stockAdd').val());
             var stockSub = 0;
-
-            if(confirm(stockAdd+"개 입고하시겠습니까?")){
-                _this.log(inStock, stockAdd, stockSub);
-            } else {return false;}
+            if(stockAdd>0){
+                if(confirm(stockAdd+"개 입고하시겠습니까?")){
+                    _this.log(inStock, stockAdd, stockSub);
+                } else {return false;}
+            } else {
+                alert("입고수량을 다시 입력해주십시오.");
+                return false;
+            }
         });
         $('#btn-stock-out').on('click', function(){
             var inStock = Number($('#inStock').val());
             var stockAdd = 0;
             var stockSub = Number($('#stockSub').val());
-            if(inStock  >= stockSub) {
-                if(confirm(stockSub+"개 출고하시겠습니까?")){
-                    _this.log(inStock, stockAdd, stockSub);
+            if(stockSub > 0) {
+                if (inStock >= stockSub) {
+                    if (confirm(stockSub + "개 출고하시겠습니까?")) {
+                        _this.log(inStock, stockAdd, stockSub);
+                    } else {
+                        return false;
+                    }
                 } else {
-                    return false;
+                    alert("재고가 부족해 출고 명령할 수 없습니다.");
                 }
             } else {
-                alert("재고가 부족해 출고 명령할 수 없습니다.");
+                alert("출고수량을 다시 입력해주십시오.");
+                return false;
             }
         });
     },
 
     log : function(inStock, stockAdd, stockSub) {
-        console.log("함수진입");
         var barcode = $('#barcodeId').val();
 
         var data = {
