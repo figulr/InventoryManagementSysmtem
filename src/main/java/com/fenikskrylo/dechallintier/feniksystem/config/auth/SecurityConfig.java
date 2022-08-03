@@ -38,8 +38,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()
                 // h2 이용을 위해 추가
-//                .headers().frameOptions().disable()
-//                .and()
+                .headers().frameOptions().disable()
+                .and()
                 .authorizeRequests()
                 .antMatchers( "/css/**", "/images/**", "/js/**", "/h2-console/**", "/profile",
                             "/api/v0/**","/auth/register")

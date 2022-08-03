@@ -4,3 +4,8 @@
 
 /src/main/resources/application.properties
 /src/main/resources/application-oauth.properties
+/src/main/resources/application-server.properties
+/src/main/resources/application-real.properties
+
+/src/main/resources/schema.sql
+/src/main/resources/data.sql

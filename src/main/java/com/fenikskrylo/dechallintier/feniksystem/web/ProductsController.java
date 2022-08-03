@@ -61,6 +61,7 @@ public class ProductsController {
             nonePirceList.add(nonePriceDto);
             model.addAttribute("priceList", nonePirceList);
         };
+
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         User member = (User) authentication.getPrincipal();
         String userName = memberService.getName(member.getUsername());
@@ -116,5 +117,10 @@ public class ProductsController {
         System.out.println(dto);
         model.addAttribute("product", dto);
         return "product/update";
+    }
+
+    @GetMapping("/product/in-out")
+    public String productInOut(){
+        return "product/in-out";
     }
 }
