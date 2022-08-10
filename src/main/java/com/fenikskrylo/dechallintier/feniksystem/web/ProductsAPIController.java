@@ -2,6 +2,7 @@ package com.fenikskrylo.dechallintier.feniksystem.web;
 
 import com.fenikskrylo.dechallintier.feniksystem.config.auth.LoginUser;
 import com.fenikskrylo.dechallintier.feniksystem.config.auth.dto.SessionUser;
+import com.fenikskrylo.dechallintier.feniksystem.domain.product.Products;
 import com.fenikskrylo.dechallintier.feniksystem.service.ProductPriceService;
 import com.fenikskrylo.dechallintier.feniksystem.service.ProductStockService;
 import com.fenikskrylo.dechallintier.feniksystem.service.ProductsService;
@@ -47,6 +48,15 @@ public class ProductsAPIController {
     @PostMapping("/api/v1/stock/{barcode}")
     public Long stockSave(@RequestBody ProductStockUpdateDto stockDto){
         return productStockService.save(stockDto);
+    }
+
+    @ResponseBody
+    @GetMapping("/api/v1/in/{barcode}")
+    public ProductsResponseDto intoList(@PathVariable Long barcode){
+        System.out.println("진입");
+        ProductsResponseDto products = productsService.findByBarcodeId(barcode);
+        System.out.println(products.getBarcodeId());
+        return products;
     }
 
     // price manage

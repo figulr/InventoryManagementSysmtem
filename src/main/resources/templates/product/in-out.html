@@ -34,6 +34,7 @@
     <table class="table table-horizontal table-bordered">
         <thead class="thead-strong">
         <tr>
+            <th>NO</th>
             <th>id</th>
             <th>barcode</th>
             <th>제품이름</th>
@@ -44,25 +45,25 @@
         </thead>
         <tbody th:unless="${#lists.isEmpty(list)}" id="tbody">
         <tr th:each="x : ${list}">
+            <td>no</td>
             <td th:text="${x.id}">id</td>
             <td th:text="${x.barcodeId}">barcode</td>
             <td ><a th:href="'/product/detail/'+${x.barcodeId}" th:text="${x.productName}" target='_blank'>product name</a></td>
             <td th:text="${x.brand}">brand</td>
             <td th:text="${x.price}">price</td>
             <td>
-                <span>🔺</span>
-                <span></span>
-                <span>🔻</span>
+                <input type="number" value="1" min="1">
             </td>
         </tr>
         </tbody>
     </table>
+    <button class="btn btn-primary" id="btn-in">검색</button>
+    <button class="btn btn-primay" id="btn-in-complete">입고</button>
 </div>
 
 
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-<script src="/js/app/index.js"></script>
-<script src="/js/app/keywordSearch.js"></script>
+<script src="/js/app/in-out.js"></script>
 </body>
 </html>
