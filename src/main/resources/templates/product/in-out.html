@@ -23,12 +23,11 @@
     <div class>
         <div class="unit-function">
             <h3>입고</h3>
-            <form action="/product/search.api" method="GET">
                 <div class="form-group">
                     <input type="barcode" name="barcode" id="searchBarcode">
                 </div>
-                <button role="button" type="submit" id="btn-search" class="btn btn-primary" hidden>검색</button>
-            </form>
+                <button class="btn btn-primary" id="btn-in">검색</button>
+<!--                <button role="button" type="submit" id="btn-search" class="btn btn-primary" hidden>검색</button>-->
         </div>
     </div>
     <table class="table table-horizontal table-bordered">
@@ -57,7 +56,6 @@
         </tr>
         </tbody>
     </table>
-    <button class="btn btn-primary" id="btn-in">검색</button>
     <button class="btn btn-primay" id="btn-in-complete">입고</button>
 </div>
 

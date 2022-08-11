@@ -3,8 +3,14 @@ var barcodeList = [];
 var main = {
     init : function () {
         var _this = this;
+        $('#searchBarcode').focus();
         $('#btn-in').on('click', function(){
             _this.intoListing();
+        });
+        $('#searchBarcode').on('keyup', function(key){
+            if(key.keyCode == 13) {
+                _this.intoListing();
+            }
         });
         $('#btn-in-complete').on('click', function(){
             _this.intoOperation();
@@ -20,6 +26,7 @@ var main = {
                         k = j+1;
                         $('#'+k+'-number').attr("value", String(Number($('#'+k+'-number').val())+1));
                         checked = true;
+                        $('#searchBarcode').val('');
                     } else {
                         continue;
                     }
@@ -55,6 +62,7 @@ var main = {
                         `
                     $('.table').append(row);
                     i++;
+                    $('#searchBarcode').val('');
                 }).fail(function (error) {
                     alert(JSON.stringify(error));
                 })
