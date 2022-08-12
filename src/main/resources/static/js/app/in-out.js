@@ -48,6 +48,8 @@ var main = {
                 var barcode = $('#searchBarcode').val();
                 if(Number(barcode) == 0 | !barcode){
                     alert("바코드를 입력해주세요.");
+                    $('#searchBarcode').val('');
+                    $('#searchBarcode').focus();
                 } else{
                     _this.intoListing(barcode);
                 }
