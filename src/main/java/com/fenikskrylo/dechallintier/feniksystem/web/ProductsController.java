@@ -120,7 +120,13 @@ public class ProductsController {
     }
 
     @GetMapping("/product/in-out")
-    public String productInOut(){
+    public String productInOut(Model model){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User member = (User) authentication.getPrincipal();
+        String userName = memberService.getName(member.getUsername());
+        if(member != null){
+            model.addAttribute("userName", userName);
+        }
         return "product/in-out";
     }
 }

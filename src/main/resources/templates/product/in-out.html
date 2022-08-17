@@ -15,6 +15,7 @@
 <div>
     <div class="header-logo" th:replace="fragments/header.html :: logo"></div>
     <div class="header-btn">
+        <span th:text="${userName}" id="user"></span>
         <div th:replace="fragments/header.html :: logout"></div>
         <hr>
     </div>
