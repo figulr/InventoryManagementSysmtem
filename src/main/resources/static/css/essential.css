@@ -85,10 +85,9 @@ td {
     display: flex;
     justify-content: space-between;
 }
-/*.half-form-group{*/
-/*    width: 30%;*/
-/*    display: grid;*/
-/*}*/
+.half-form-group{
+    width: 50%;
+}
 .half-form-group button{
     width: 90%;
 }

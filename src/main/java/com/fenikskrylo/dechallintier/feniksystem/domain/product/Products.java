@@ -44,6 +44,23 @@ public class Products extends BaseTimeEntity {
     private String volumeHeight;
 
     @Builder
+    public Products(long id, long barcodeId, String productName, long price, String brand, String store, String weight,
+                    String unit,
+                    String volumeShort, String volumeLong, String volumeHeight) {
+        this.id = id;
+        this.barcodeId = barcodeId;
+        this.productName = productName;
+        this.price = price;
+        this.brand = brand;
+        this.store = store;
+        this.weight = weight;
+        this.unit = unit;
+        this.volumeShort = volumeShort;
+        this.volumeLong = volumeLong;
+        this.volumeHeight = volumeHeight;
+    }
+
+    @Builder
     public Products(long barcodeId, String productName, long price, String brand, String store, String weight,
                     String unit,
                     String volumeShort, String volumeLong, String volumeHeight) {

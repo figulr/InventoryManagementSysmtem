@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>입출고내역</title>
+
+    <!-- Bootstrap -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <link th:href="@{/css/essential.css}" rel="stylesheet">
+</head>
+<body>
+<div>
+    <div class="header-logo" th:replace="fragments/header.html :: logo"></div>
+    <div class="header-btn">
+        <div th:replace="fragments/header.html :: logout"></div>
+        <hr>
+    </div>
+</div>
+<div class="body-content">
+    <div class>
+        <div class="unit-function">
+            <h3>입출고 조회</h3>
+            <form action="/product/search.api" method="GET">
+                <div class="form-group">
+                    <select id="searchType" name="searchType">
+                        <option value="barcodeId">바코드</option>
+                        <option value="brand">브랜드</option>
+                    </select>
+                    <input type="text" id="barcodeId">
+                    <input type="text" name="searchValue" id="searchValue">
+                    <br><br>
+                    <input type="date" id="startDate" min="2022-05-01" th:value="${date}"> ~ <input type="date"
+                                                                                                 id="endDate"
+                                                                                  min="2022-05-01">
+                </div>
+                <button role="button" type="submit" id="btn-search" class="btn btn-primary">검색</button>
+            </form>
+        </div>
+    </div>
+    <table class="table table-horizontal table-bordered">
+        <thead class="thead-strong">
+        <tr>
+            <th>barcode</th>
+            <th>제품이름</th>
+            <th>브랜드</th>
+            <th>가격</th>
+            <th>재고</th>
+            <th>입고</th>
+            <th>출고</th>
+        </tr>
+        </thead>
+        <tbody th:unless="${#lists.isEmpty(list)}" id="tbody">
+        <tr th:each="x : ${list}">
+            <td th:text="${x.barcodeId}">barcode</td>
+            <td ><a th:href="'/product/detail/'+${x.barcodeId}" th:text="${x.productName}" target='_blank'>product name</a></td>
+            <td th:text="${x.brand}">brand</td>
+            <td th:text="${x.price}">price</td>
+            <td th:text="${x.inStock}">inStock</td>
+            <td th:text="${x.stockAdd}">stockAdd</td>
+            <td th:text="${x.stockSub}">stockSub</td>
+        </tr>
+        <div th:if="${#lists.isEmpty(list)}">
+            <p>입출고 이력이 존재하지 않습니다.</p>
+        </div>
+        </tbody>
+    </table>
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="/js/app/index.js"></script>
+<script src="/js/app/keywordSearch.js"></script>
+</body>
+</html>

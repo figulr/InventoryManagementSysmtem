@@ -23,6 +23,7 @@ public class ProductsResponseDto {
     private LocalDateTime createdDate;
     private LocalDateTime modifiedDate;
     private boolean registered = true;
+    private int inStock;
 
     public ProductsResponseDto(Products entity){
         this.id = entity.getId();
@@ -38,6 +39,23 @@ public class ProductsResponseDto {
         this.volumeHeight = entity.getVolumeHeight();
         this.createdDate = entity.getCreatedDate();
         this.modifiedDate = entity.getModifiedDate();
+    }
+
+    public ProductsResponseDto(Products entity, int inStock){
+        this.id = entity.getId();
+        this.barcodeId = entity.getBarcodeId();
+        this.productName = entity.getProductName();
+        this.brand = entity.getBrand();
+        this.store = entity.getStore();
+        this.price = entity.getPrice();
+        this.weight = entity.getWeight();
+        this.unit = entity.getUnit();
+        this.volumeShort = entity.getVolumeShort();
+        this.volumeLong = entity.getVolumeLong();
+        this.volumeHeight = entity.getVolumeHeight();
+        this.createdDate = entity.getCreatedDate();
+        this.modifiedDate = entity.getModifiedDate();
+        this.inStock = inStock;
     }
 
     public ProductsResponseDto(boolean result){

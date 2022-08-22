@@ -19,6 +19,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.List;
@@ -52,8 +54,8 @@ public class ProductsController {
         ProductsResponseDto dto = productsService.findByBarcodeId(barcode);
         ProductStockResponseDto stockDto = productStockService.latestLog(barcode);
         if(productPriceService.checkHistory(barcode)){
-         List<ProductPriceResponseDto> priceDto = productPriceService.latestLog(barcode);
-         model.addAttribute("priceList", priceDto);}
+            List<ProductPriceResponseDto> priceDto = productPriceService.latestLog(barcode);
+            model.addAttribute("priceList", priceDto);}
         else {
             ProductPriceResponseDto nonePriceDto =
                     new ProductPriceResponseDto(productPriceService.checkHistory(barcode));
@@ -61,7 +63,6 @@ public class ProductsController {
             nonePirceList.add(nonePriceDto);
             model.addAttribute("priceList", nonePirceList);
         };
-
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         User member = (User) authentication.getPrincipal();
         String userName = memberService.getName(member.getUsername());
@@ -119,14 +120,29 @@ public class ProductsController {
         return "product/update";
     }
 
-    @GetMapping("/product/in-out")
-    public String productInOut(Model model){
+    @GetMapping("/product/in-out/{mode}")
+    public String productInOut(Model model, @PathVariable String mode){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         User member = (User) authentication.getPrincipal();
         String userName = memberService.getName(member.getUsername());
         if(member != null){
             model.addAttribute("userName", userName);
         }
+        model.addAttribute("mode", mode);
         return "product/in-out";
+    }
+
+    @GetMapping("/product/inout-result/{stringDate}")
+    public String productInoutResult(Model model, @PathVariable String stringDate){
+        List<ProductStockResponseDto> list;
+        LocalDate date = LocalDate.parse(stringDate, DateTimeFormatter.ISO_DATE);
+        if(date!=LocalDate.now()) {
+            list = productStockService.dailyStockLog(date);
+        } else{
+            list = productStockService.dailyStockLog(LocalDate.now());
+        }
+        model.addAttribute("list", list);
+        model.addAttribute("date", date);
+        return "product/inout-result";
     }
 }

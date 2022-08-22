@@ -21,16 +21,51 @@
     </div>
 </div>
 <div class="body-content">
-    <div class>
+    <div class="unit-function">
+    <div class="form-group">
+        <div th:if="${mode == 'in'}" class="row-group">
+            <div class="half-form-group">
+                <a  role="button" class="btn" id="btn-stock-in" href="/product/in-out/in"
+                        style="background-color: blue; width:200px; color: #f2f2f2">입 고</a>
+            </div>
+            <div class="half-form-group">
+                <a role="button" class="btn " id="btn-stock-out" href="/product/in-out/out" style="background-color:
+                darkred; width:200px; color:
+                #f2f2f2">출
+                    고</a>
+            </div>
+            <div id="mode" hidden>in</div>
+            <script>
+                document.body.style.backgroundColor = '#5DB7FF';
+            </script>
+        </div>
+        <div th:if="${mode == 'out'}" class="row-group">
+            <div class="half-form-group">
+                <a  role="button" class="btn btn-primary" id="btn-stock-in"
+                         style="background-color: darkblue; width:200px; color: #f2f2f2" href="/product/in-out/in">입 고</a>
+            </div>
+            <div class="half-form-group">
+                <a role="button" class="btn btn-danger" id="btn-stock-out" href="/product/in-out/out"
+                   style="background-color: red; width:200px; color:
+                 #f2f2f2">출
+                    고</a>
+            </div>
+            <div id="mode" hidden>out</div>
+            <script>
+                document.body.style.backgroundColor = '#ff7a7a';
+            </script>
+        </div>
+    </div>
+    </div>
         <div class="unit-function">
-            <h3>입고</h3>
+            <h3 th:if="${mode == 'in'}">입고</h3>
+            <h3 th:if="${mode == 'out'}">출고</h3>
                 <div class="form-group">
                     <input type="barcode" name="barcode" id="searchBarcode">
                 </div>
                 <button class="btn btn-primary" id="btn-in">검색</button>
 <!--                <button role="button" type="submit" id="btn-search" class="btn btn-primary" hidden>검색</button>-->
         </div>
-    </div>
     <table class="table table-horizontal table-bordered">
         <thead class="thead-strong">
         <tr>
@@ -41,6 +76,7 @@
             <th>브랜드</th>
             <th>가격</th>
             <th>재고</th>
+            <th>수량</th>
         </tr>
         </thead>
         <tbody th:unless="${#lists.isEmpty(list)}" id="tbody">
@@ -51,6 +87,7 @@
             <td ><a th:href="'/product/detail/'+${x.barcodeId}" th:text="${x.productName}" target='_blank'>product name</a></td>
             <td th:text="${x.brand}">brand</td>
             <td th:text="${x.price}">price</td>
+            <th th:text="${x.inStock}">inSotck</th>
             <td>
                 <input type="number" value="1" min="1">
             </td>

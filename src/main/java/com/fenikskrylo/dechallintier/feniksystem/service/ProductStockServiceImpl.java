@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -59,10 +60,8 @@ public class ProductStockServiceImpl implements ProductStockService {
         Optional<List<StockLog>> optionalStockLog =
                 stockLogRepository.find();
         if(!optionalStockLog.isPresent()){
-            System.out.println("재고 있는 제품이 없다.");
             return Collections.emptyList();
         }
-        System.out.println("재고가 존재한다.");
         List<StockLog> stockLog = optionalStockLog.get();
         List<ProductStockResponseDto> responseDtos = new ArrayList<>();
         List<Long> _barcodeList = new ArrayList<>();
@@ -84,7 +83,6 @@ public class ProductStockServiceImpl implements ProductStockService {
                         _createdDate.set(j, createdDate);
                         // 저장
                         Products products = optionalProducts.get();
-                        System.out.println("재고 상품 리스트에 올라간다.");
                         String productName = products.getProductName();
                         String brand = products.getBrand();
                         ProductStockResponseDto dto = new ProductStockResponseDto(stock, productName, brand);
@@ -98,7 +96,6 @@ public class ProductStockServiceImpl implements ProductStockService {
                     _createdDate.add(createdDate);
                     // 저장
                     Products products = optionalProducts.get();
-                    System.out.println("재고 상품 리스트에 올라간다.");
                     String productName = products.getProductName();
                     String brand = products.getBrand();
                     ProductStockResponseDto dto = new ProductStockResponseDto(stock, productName, brand);
@@ -106,8 +103,37 @@ public class ProductStockServiceImpl implements ProductStockService {
                 }
             }
         }
-        System.out.println("재고 상품 모두 리스트에 올라갔다.");
         System.out.println(responseDtos);
         return responseDtos;
+    }
+
+    @Override
+    public List<ProductStockResponseDto> dailyStockLog(LocalDate date) {
+        Optional<List<StockLog>> optionalList =
+                stockLogRepository.findByCreatedDateBetween(date.atStartOfDay(),
+                date.atStartOfDay().plusDays(1));
+
+        if(!optionalList.isPresent()){
+            return Collections.emptyList();
+        }
+        List<StockLog> stockLog = optionalList.get();
+        List<ProductStockResponseDto> responseDtos = new ArrayList<>();
+
+        for(StockLog stock : stockLog){
+            Optional<Products> optionalProducts = productsRepository.findByBarcodeId(stock.getBarcodeId());
+            if(!optionalProducts.isPresent()){
+                System.out.println("이 상품은 검색이 안된다."+stock.getBarcodeId());
+            } else {
+                // 저장
+                Products products = optionalProducts.get();
+                String productName = products.getProductName();
+                String brand = products.getBrand();
+                long price = products.getPrice();
+                ProductStockResponseDto dto = new ProductStockResponseDto(stock, productName, brand, price);
+                responseDtos.add(dto);
+            }
+        }
+        return responseDtos;
+
     }
 }

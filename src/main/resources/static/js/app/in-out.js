@@ -55,9 +55,9 @@ var main = {
                 }
             }
         });
-        // $('#btn-in-complete').on('click', function(){
-        //     _this.intoOperation();
-        // })
+        $('#btn-in-complete').on('click', function(){
+            _this.intoOperation();
+        })
     },
 
     intoListing : function(barcode) {
@@ -81,7 +81,7 @@ var main = {
                 barcodeList.push(barcode);
                 $.ajax({
                     type: 'GET',
-                    url: '/api/v1/in/' + barcode,
+                    url: '/api/v1/stock/check/' + barcode,
                     dataType: 'json',
                     contentType: 'application/json; charset=utf-8',
                 }).done(function (response) {
@@ -91,7 +91,8 @@ var main = {
                             "barcodeId": response.barcodeId,
                             "productName": response.productName,
                             "brand": response.brand,
-                            "price": response.price
+                            "price": response.price,
+                            "inStock":response.inStock
                         }
                         let row = `
                         <tr>
@@ -101,6 +102,7 @@ var main = {
                             <td><a th:href="'/product/detail/'+${product.barcodeId}" target='_blank'>${product.productName}</a></td>
                             <td>${product.brand}</td>
                             <td>${product.price}</td>
+                            <td id="${i + 1}-inStock">${product.inStock}</td>
                             <td>
                                 <input type="number" id="${i + 1}-number" value="1" min="1" onchange="valueChange(${i + 1})">
                             </td>
@@ -121,19 +123,55 @@ var main = {
     },
 
     intoOperation : function (){
-        // var data = [
-        //     "barcodeId":$('#searchBarcode').val(),
-        //     ""
-        // ];
+        var data = [];
+        for(j=1; j< i+1; j++){
+            var stockAdd = Number($('#'+j+'-number').val());
+            var input = {
+                "barcodeId":
+                    $('#' + j + '-barcode').html(),
+                "inStock":
+                    Number($('#' + j + '-inStock').html()) + stockAdd,
+                "stockAdd":
+                stockAdd,
+                "stockSub":
+                    0,
+                "name":
+                document.getElementById('user').innerText
+            }
+            data.push(input);
+        }
+        // var dataList = JSON.stringify(data);
+        // alert(dataList);
         $.ajax({
-            type : 'GET',
-            url : '/api/v1/in/'+barcode,
-            dataType: 'json',
+            type : 'POST',
+            url : '/api/v1/stock/in',
+            dataType: 'JSON',
             contentType: 'application/json; charset=utf-8',
             data: JSON.stringify(data)
         }).done(function(response){
-            alert('제품정보를 불러왔습니다.');
-            alert(response);
+            if(response.result) {
+                alert('입고를 완료 했습니다.');
+                background.offProtect();
+                let fullToday = new Date();
+                var year = fullToday.getFullYear();
+                var month = fullToday.getMonth()+1;
+                if(month < 10){
+                    month = "0"+month;
+                }
+                var day = fullToday.getDate()
+                if(day < 10){
+                    day = "0"+day;
+                }
+                var today = year+"-"+month+"-"+day;
+                alert(today);
+                window.location.href="/product/inout-result/"+today;
+            } else {
+                var list = [];
+                for(i=0; i<list.length; i++){
+                    list.push(response.list[i]);
+                }
+                alert("입고에 실패한 물품이 있습니다."+list);
+            }
         }).fail(function (error){
             alert(JSON.stringify(error));
         })
