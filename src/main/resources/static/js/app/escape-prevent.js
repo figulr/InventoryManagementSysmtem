@@ -1,11 +1,16 @@
-var main = {
+var background = {
+
+     const :  listener = (event) => {
+        event.preventDefault();
+        event.returnValue = '';
+    },
     initProtect: function () {
-        window.addEventListener('beforeunload', (event)=>{
-            event.preventDefault();
-            event.returnValue = '';
-            // confirm("페이지를 나가겠습니까?");
-        })
+        window.addEventListener('beforeunload', listener);
+    },
+
+    offProtect: function(){
+        window.removeEventListener('beforeunload', listener);
     }
 }
 
-main.initProtect();
+background.initProtect();
