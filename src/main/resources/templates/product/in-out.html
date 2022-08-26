@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width">
     <title>입출고</title>
 
     <!-- Bootstrap -->
@@ -21,16 +21,16 @@
     </div>
 </div>
 <div class="body-content">
-    <div class="unit-function">
     <div class="form-group">
         <div th:if="${mode == 'in'}" class="row-group">
             <div class="half-form-group">
-                <a  role="button" class="btn" id="btn-stock-in" href="/product/in-out/in"
-                        style="background-color: blue; width:200px; color: #f2f2f2">입 고</a>
+                    <a class="btn btn-half" id="btn-stock-in" href="/product/in-out/in"
+                       style="background-color: blue; color: #f2f2f2">입 고</a>
             </div>
             <div class="half-form-group">
-                <a role="button" class="btn " id="btn-stock-out" href="/product/in-out/out" style="background-color:
-                darkred; width:200px; color:
+                <a class="btn btn-half" id="btn-stock-out" href="/product/in-out/out"
+                    style="background-color:
+                darkred; color:
                 #f2f2f2">출
                     고</a>
             </div>
@@ -41,12 +41,12 @@
         </div>
         <div th:if="${mode == 'out'}" class="row-group">
             <div class="half-form-group">
-                <a  role="button" class="btn btn-primary" id="btn-stock-in"
-                         style="background-color: darkblue; width:200px; color: #f2f2f2" href="/product/in-out/in">입 고</a>
+                <a class="btn btn-half" id="btn-stock-in"
+                         style="background-color: darkblue; color: #f2f2f2" href="/product/in-out/in">입 고</a>
             </div>
             <div class="half-form-group">
-                <a role="button" class="btn btn-danger" id="btn-stock-out" href="/product/in-out/out"
-                   style="background-color: red; width:200px; color:
+                <a class="btn btn-half" id="btn-stock-out" href="/product/in-out/out"
+                   style="background-color: red; color:
                  #f2f2f2">출
                     고</a>
             </div>
@@ -58,45 +58,50 @@
     </div>
     </div>
         <div class="unit-function">
-            <h3 th:if="${mode == 'in'}">입고</h3>
-            <h3 th:if="${mode == 'out'}">출고</h3>
+            <h3 th:if="${mode == 'in'}" id="mode">입고</h3>
+            <h3 th:if="${mode == 'out'}" id="mode">출고</h3>
                 <div class="form-group">
                     <input type="barcode" name="barcode" id="searchBarcode">
                 </div>
                 <button class="btn btn-primary" id="btn-in">검색</button>
 <!--                <button role="button" type="submit" id="btn-search" class="btn btn-primary" hidden>검색</button>-->
         </div>
+    <div class="unit-function">
+    <button th:if="${mode == 'in'}" class="btn" style="background-color: orangered; color: #fff"
+            id="btn-in-complete">입고요청</button>
+    <button th:if="${mode == 'out'}" class="btn" style="background-color: green; color: #fff "
+            id="btn-out-complete">출고요청
+    </button>
     <table class="table table-horizontal table-bordered">
         <thead class="thead-strong">
         <tr>
             <th>NO</th>
-            <th>id</th>
-            <th>barcode</th>
-            <th>제품이름</th>
+            <th hidden>id</th>
+            <th>바코드</th>
+            <th>제품명</th>
             <th>브랜드</th>
             <th>가격</th>
             <th>재고</th>
             <th>수량</th>
         </tr>
         </thead>
-        <tbody th:unless="${#lists.isEmpty(list)}" id="tbody">
-        <tr th:each="x : ${list}">
-            <td>no</td>
-            <td th:text="${x.id}">id</td>
-            <td th:text="${x.barcodeId}">barcode</td>
-            <td ><a th:href="'/product/detail/'+${x.barcodeId}" th:text="${x.productName}" target='_blank'>product name</a></td>
-            <td th:text="${x.brand}">brand</td>
-            <td th:text="${x.price}">price</td>
-            <th th:text="${x.inStock}">inSotck</th>
-            <td>
-                <input type="number" value="1" min="1">
-            </td>
-        </tr>
+<!--        <tbody th:unless="${#lists.isEmpty(list)}" id="tbody">-->
+<!--        <tr th:each="x : ${list}">-->
+<!--            <td>no</td>-->
+<!--            <td th:text="${x.id}" hidden>id</td>-->
+<!--            <td th:text="${x.barcodeId}">barcode</td>-->
+<!--            <td ><a th:href="'/product/detail/'+${x.barcodeId}" th:text="${x.productName}" target='_blank'>product name</a></td>-->
+<!--            <td th:text="${x.brand}">brand</td>-->
+<!--            <td th:text="${x.price}">price</td>-->
+<!--            <th th:text="${x.inStock}">inSotck</th>-->
+<!--            <td>-->
+<!--                <input type="number" value="1" min="1">-->
+<!--            </td>-->
+<!--        </tr>-->
         </tbody>
     </table>
-    <button class="btn btn-primay" id="btn-in-complete">입고</button>
+        </div>
 </div>
-
 
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>

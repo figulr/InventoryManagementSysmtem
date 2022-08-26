@@ -1,6 +1,9 @@
 body {
-    width: 500px;
+    min-width: 300px;
+    max-width: 500px;
+    min-height: 100vw;
     margin: 0 auto;
+    text-align: center;
     background-color: #f2f2f2 ;
 }
 
@@ -18,6 +21,7 @@ body {
     /*display: flex;*/
     /*justify-content: right;*/
     text-align: right;
+    padding: 0 10px;
 }
 h1 {
     margin-top: 30px;
@@ -34,14 +38,25 @@ h1 a:hover {
 h3 {
     margin-bottom: 20px;
 }
+input{
+    max-width: 300px;
+    width: 55%;
+}
 
 .body-content {
-    text-align: center;
+    /*text-align: center;*/
+    justify-content: center;
 }
 
 .btn {
-    width: 300px;
+    max-width: 500px;
+    min-width: 50%;
     margin: 3px auto;
+}
+
+.btn-half {
+    max-width: 400px;
+    min-width: 80%;
 }
 
 .msg {
@@ -74,12 +89,24 @@ h3 {
     display: inline-block;
     width: 300px;
 }
+table {
+    font-size: 12px;
+    width: 100%;
+    table-layout: fixed;
+}
 th {
+    width: 100%;
+    text-overflow: ellipsis;
     background-color: #002147;
     color: white;
 }
 td {
+    width: 100%;
+    overflow: auto;
     background-color: white;
+}
+td input{
+    width: 100%;
 }
 .row-group{
     display: flex;

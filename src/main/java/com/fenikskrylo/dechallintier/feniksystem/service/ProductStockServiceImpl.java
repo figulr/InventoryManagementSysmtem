@@ -110,7 +110,7 @@ public class ProductStockServiceImpl implements ProductStockService {
     @Override
     public List<ProductStockResponseDto> dailyStockLog(LocalDate date) {
         Optional<List<StockLog>> optionalList =
-                stockLogRepository.findByCreatedDateBetween(date.atStartOfDay(),
+                stockLogRepository.findByCreatedDateBetweenOrderByCreatedDateDesc(date.atStartOfDay(),
                 date.atStartOfDay().plusDays(1));
 
         if(!optionalList.isPresent()){

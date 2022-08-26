@@ -13,7 +13,8 @@ public interface StockLogRepository extends JpaRepository<StockLog, Long> {
 
     Optional<StockLog> findFirstByBarcodeIdOrderByCreatedDateDesc(long barcode);
 
-    Optional<List<StockLog>> findByCreatedDateBetween(LocalDateTime startDate, LocalDateTime endDate);
+    Optional<List<StockLog>> findByCreatedDateBetweenOrderByCreatedDateDesc(LocalDateTime startDate,
+                                                                          LocalDateTime endDate);
 
     @Query(value = "select s from StockLog s")
     Optional<List<StockLog>> find();

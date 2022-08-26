@@ -22,22 +22,35 @@
 <div class="body-content">
     <div class>
         <div class="unit-function">
-            <h3>입출고 조회</h3>
-            <form action="/product/search.api" method="GET">
-                <div class="form-group">
-                    <select id="searchType" name="searchType">
-                        <option value="barcodeId">바코드</option>
-                        <option value="brand">브랜드</option>
-                    </select>
-                    <input type="text" id="barcodeId">
-                    <input type="text" name="searchValue" id="searchValue">
-                    <br><br>
-                    <input type="date" id="startDate" min="2022-05-01" th:value="${date}"> ~ <input type="date"
-                                                                                                 id="endDate"
-                                                                                  min="2022-05-01">
+            <div class="row-group">
+                <div class="half-form-group">
+                    <a role="button" class="btn" style="background-color: blue; width: 200px; color: #f2f2f2"
+                       href="/product/in-out/in">입고
+                    </a>
                 </div>
-                <button role="button" type="submit" id="btn-search" class="btn btn-primary">검색</button>
-            </form>
+                <div class="half-form-group">
+                    <a role="button" class="btn" style="background-color: red; width: 200px; color: #f2f2f2"
+                       href="/product/in-out/out">출고</a>
+                </div>
+            </div>
+        </div>
+        <div class="unit-function">
+            <h3>입출고 내역 조회</h3>
+<!--            <form action="/product/search.api" method="GET">-->
+<!--                <div class="form-group">-->
+<!--                    <select id="searchType" name="searchType">-->
+<!--                        <option value="barcodeId">바코드</option>-->
+<!--                        <option value="brand">브랜드</option>-->
+<!--                    </select>-->
+<!--                    <input type="text" id="barcodeId">-->
+<!--                    <input type="text" name="searchValue" id="searchValue">-->
+<!--                    <br><br>-->
+<!--                    <input type="date" id="startDate" min="2022-05-01" th:value="${date}"> ~ <input type="date"-->
+<!--                                                                                                 id="endDate"-->
+<!--                                                                                  min="2022-05-01">-->
+<!--                </div>-->
+<!--                <button role="button" type="submit" id="btn-search" class="btn btn-primary">검색</button>-->
+<!--            </form>-->
         </div>
     </div>
     <table class="table table-horizontal table-bordered">
