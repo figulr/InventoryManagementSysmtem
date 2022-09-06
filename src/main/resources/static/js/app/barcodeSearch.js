@@ -1,9 +1,18 @@
 var main = {
     init: function () {
-        var _this = this;
-        $('#btn-search').on('click', function () {
-            _this.search();
+        $('#btn-search').on('keyup', function(key){
+            if(key.keyCode == 13) {
+                var barcode = $('#searchBarcode').val();
+                if(Number(barcode) == 0 | !barcode){
+                    alert("바코드를 입력해주세요.");
+                    $('#searchBarcode').val('');
+                    $('#searchBarcode').focus();
+                } else{
+                    _this.search();
+                }
+            }
         });
+
     },
 
     search : function() {
@@ -13,7 +22,6 @@ var main = {
             alert("바코드를 입력하세요.");
             return false;
         }
-        // if(type!=i)
         form.action = "/product/detail/" + barcode;
         form.method = 'GET';
 
