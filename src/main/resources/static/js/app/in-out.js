@@ -1,6 +1,6 @@
-var i = 0;
-var barcodeList = [];
-var countedProduct = 0;
+var i;
+var barcodeList;
+var countedProduct;
 var countedHidden = 0;
 
 function valueChange(l) {
@@ -36,6 +36,9 @@ function deleteRow(l) {
 
 var main = {
     init : function () {
+        i = 0;
+        barcodeList = [];
+        countedProduct =0;
         var _this = this;
         $('#searchBarcode').focus();
         $('#btn-in').on('click', function(){
@@ -224,11 +227,11 @@ var main = {
                         $('#searchBarcode').val('');
                     }
                 } else {
-                    alert("바코드를 다시 입력해주세요.");
+                    alert("등록되어 있지 않은 상품입니다.");
                     $('#searchBarcode').val('');
                 }
             }).fail(function (){
-                alert("바코드를 다시 입력해주세요.");
+                alert("다시 시도해 주십시오.");
                 $('#searchBarcode').val('');
             })
         }
