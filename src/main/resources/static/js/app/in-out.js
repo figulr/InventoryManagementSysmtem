@@ -147,11 +147,11 @@ var main = {
                             countedProduct++;
                             $('#searchBarcode').val('');
                     } else {
-                        alert("바코드를 다시 입력해주세요.");
+                        alert("등록되어 있지 않은 상품입니다.");
                         $('#searchBarcode').val('');
                     }
                 }).fail(function (){
-                        alert("바코드를 다시 입력해주세요.");
+                        alert("다시 시도해 주십시오.");
                         $('#searchBarcode').val('');
                 })
             }
