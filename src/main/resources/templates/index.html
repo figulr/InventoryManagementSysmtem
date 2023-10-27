@@ -27,17 +27,17 @@
         <hr/>
     </div>
     <div class="body-content">
-        <div class="unit-function">
-            <h3>상품 조회</h3>
-            <div class="form-group">
-                <form>
-                    <label for="search-barcodeId" >바코드</label>
-                    <input type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g,
-                    '$1');" id="search-barcodeId" placeholder="바코드번호를 입력하세요.">
-                </form>
-            </div>
-            <button role="button" id="btn-search" class="btn btn-primary">조회</button>
-        </div>
+<!--        <div class="unit-function">-->
+<!--            <h3>상품 조회</h3>-->
+<!--            <div class="form-group">-->
+<!--                <form>-->
+<!--                    <label for="search-barcodeId" >바코드</label>-->
+<!--                    <input type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g,-->
+<!--                    '$1');" id="search-barcodeId" placeholder="바코드번호를 입력하세요.">-->
+<!--                </form>-->
+<!--            </div>-->
+<!--            <button role="button" id="btn-search" class="btn btn-primary">조회</button>-->
+<!--        </div>-->
         <div class="unit-function">
             <h3>상품등록</h3>
             <a href="/product/register" role="button" class="btn btn-secondary">등록</a>
@@ -56,16 +56,16 @@
                 </div>
             </div>
         </div>
+<!--        <div class="unit-function">-->
+<!--            <h3>재고 상품 리스트</h3>-->
+<!--            <a href="/product/in-stock" role="button" class="btn btn-secondary">확인</a>-->
+<!--        </div>-->
+<!--        <div class="unit-function">-->
+<!--            <h3>등록상품리스트</h3>-->
+<!--            <a href="/product/list" role="button" class="btn btn-secondary">확인</a>-->
+<!--        </div>-->
         <div class="unit-function">
-            <h3>재고 상품 리스트</h3>
-            <a href="/product/in-stock" role="button" class="btn btn-secondary">확인</a>
-        </div>
-        <div class="unit-function">
-            <h3>등록상품리스트</h3>
-            <a href="/product/list" role="button" class="btn btn-secondary">확인</a>
-        </div>
-        <div class="unit-function">
-                    <h3>상품 상세 검색</h3>
+                    <h3>상품 검색</h3>
                     <a href="/product/search" role="button" class="btn btn-secondary">검색</a>
         </div>
     </div>
