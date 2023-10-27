@@ -19,7 +19,8 @@ group 'com.fenikskrylo.dechallintier'
 // 2022년 7월 22일 기준 1.0.1-SNAPSHOT
 // 2022년 8월 26일 기준 1.0.2-SNAPSHOT
 // 2022년 9월 6일 기준 1.0.3,4,5-SNAPSHOT
-version '1.0.5-SNAPSHOT'
+// 2023년 10월 27일 기준 1.0.6-SNAMPSHOT
+version '1.0.6-SNAPSHOT'
 sourceCompatibility = 1.8
 
 repositories {
