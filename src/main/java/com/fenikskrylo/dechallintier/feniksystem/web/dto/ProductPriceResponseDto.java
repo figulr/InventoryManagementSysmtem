@@ -14,13 +14,14 @@ public class ProductPriceResponseDto {
     private LocalDateTime createdDate;
     private boolean history = true;
 
-    public ProductPriceResponseDto(PriceLog entity){
+    public ProductPriceResponseDto(PriceLog entity) {
         this.barcodeId = entity.getBarcodeId();
         this.updatedPrice = entity.getUpdatedPrice();
         this.createdDate = entity.getCreatedDate();
         this.history = true;
     }
-    public ProductPriceResponseDto(boolean result){
+
+    public ProductPriceResponseDto(boolean result) {
         this.history = result;
     }
 }

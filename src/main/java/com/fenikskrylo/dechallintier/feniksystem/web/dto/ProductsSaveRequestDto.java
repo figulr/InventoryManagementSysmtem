@@ -22,7 +22,7 @@ public class ProductsSaveRequestDto {
     @Builder
     public ProductsSaveRequestDto(long barcodeId, String productName, long price, String brand,
                                   String store, String weight, String unit,
-                                  String volumeShort, String volumeLong, String volumeHeight){
+                                  String volumeShort, String volumeLong, String volumeHeight) {
         this.barcodeId = barcodeId;
         this.productName = productName;
         this.price = price;
@@ -35,7 +35,7 @@ public class ProductsSaveRequestDto {
         this.volumeHeight = volumeHeight;
     }
 
-    public Products toEntity(){
+    public Products toEntity() {
         return Products.builder()
                 .barcodeId(barcodeId)
                 .productName(productName)

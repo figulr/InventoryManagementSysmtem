@@ -30,9 +30,9 @@ public class MemberServiceImpl implements MemberService {
         return true;
     }
 
-    private void validateDuplicateUser(Member member){
+    private void validateDuplicateUser(Member member) {
         Member findUser = memberRepository.findByEmail(member.getEmail());
-        if(findUser != null){
+        if (findUser != null) {
             throw new IllegalStateException("이미 계정이 존재합니다.");
         }
     }
@@ -40,7 +40,7 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public boolean emailCheck(String email) {
         Member member = memberRepository.findByEmail(email);
-        if(member != null) {
+        if (member != null) {
             return false;
         } else {
             return true;
@@ -51,7 +51,7 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Member member = memberRepository.findByEmail(username);
-        if(member == null){
+        if (member == null) {
             throw new UsernameNotFoundException("회원 정보가 존재하지 않습니다.");
         }
 
@@ -66,9 +66,9 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public String getName(String email){
+    public String getName(String email) {
         Member member = memberRepository.findByEmail(email);
-        if(member == null){
+        if (member == null) {
             throw new UsernameNotFoundException("회원 정보가 존재하지 않습니다.");
         }
 

@@ -24,27 +24,27 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private final MemberService memberService;
 
     @Bean
-    UserAuthenticationFailureHandler getFailureHandler(){
+    UserAuthenticationFailureHandler getFailureHandler() {
         return new UserAuthenticationFailureHandler();
     }
 
     @Bean
-    PasswordEncoder getPasswordEncoder(){
+    PasswordEncoder getPasswordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
     @Override
-    protected void configure(HttpSecurity http) throws Exception{
+    protected void configure(HttpSecurity http) throws Exception {
         http
                 .csrf().disable()
                 // h2 이용을 위해 추가
                 .headers().frameOptions().disable()
                 .and()
                 .authorizeRequests()
-                .antMatchers( "/css/**", "/images/**", "/js/**", "/h2-console/**", "/profile",
-                            "/api/v0/**","/auth/register")
+                .antMatchers("/css/**", "/images/**", "/js/**", "/h2-console/**", "/profile",
+                        "/api/v0/**", "/auth/register")
                 .permitAll()
-                .antMatchers("/product/**","/api/v1/**").hasRole(Role.GUEST.name())
+                .antMatchers("/product/**", "/api/v1/**").hasRole(Role.GUEST.name())
 //                .anyRequest().authenticated()
         ;
 
@@ -68,7 +68,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         super.configure(http);
     }
-
 
 
     @Override

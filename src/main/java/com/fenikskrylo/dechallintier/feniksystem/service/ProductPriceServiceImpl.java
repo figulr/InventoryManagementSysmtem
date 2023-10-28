@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
-public class ProductPriceServiceImpl implements ProductPriceService{
+public class ProductPriceServiceImpl implements ProductPriceService {
 
     private final PriceLogRepository priceLogRepository;
 
@@ -33,7 +33,7 @@ public class ProductPriceServiceImpl implements ProductPriceService{
     @Override
     public boolean checkHistory(long barcode) {
         Optional<PriceLog> optionalPriceLog = priceLogRepository.findTopByBarcodeId(barcode);
-        if(!optionalPriceLog.isPresent()){
+        if (!optionalPriceLog.isPresent()) {
             return false;
         }
         return true;
@@ -45,7 +45,7 @@ public class ProductPriceServiceImpl implements ProductPriceService{
                 = new ArrayList<>();
         Optional<List<PriceLog>> optionalProductPriceResponseDtoList =
                 priceLogRepository.findTop5ByBarcodeIdOrderByCreatedDateDesc(barcode);
-        if(!optionalProductPriceResponseDtoList.isPresent()){
+        if (!optionalProductPriceResponseDtoList.isPresent()) {
             boolean result = false;
             ProductPriceResponseDto dto = new ProductPriceResponseDto(result);
             priceHistory.add(dto);

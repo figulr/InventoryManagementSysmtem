@@ -23,7 +23,7 @@ public class ProductsListResponseDto {
     private LocalDateTime createdDate;
     private LocalDateTime modifiedDate;
 
-    public ProductsListResponseDto(Products entity){
+    public ProductsListResponseDto(Products entity) {
         this.id = entity.getId();
         this.barcodeId = entity.getBarcodeId();
         this.productName = entity.getProductName();

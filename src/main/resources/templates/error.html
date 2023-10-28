@@ -15,17 +15,18 @@
 <div>
     <div class="header-logo" th:replace="fragments/header.html :: logo"></div>
     <div class="header-btn">
-        <span th:text="${userName}" id="user" th:value="${userName}"><span th:replace="fragments/header.html :: logout"></span></span>
+        <span th:text="${userName}" id="user" th:value="${userName}"><span
+                th:replace="fragments/header.html :: logout"></span></span>
         <hr>
     </div>
 </div>
 <div class="body-content">
     <h2>ERROR</h2>
     <div class="form-group">
-            <p th:text="${errorMessage}"></p>
+        <p th:text="${errorMessage}"></p>
     </div>
     <div class="form-group">
-            <a href="/" class="btn btn-primary">홈</a>
+        <a href="/" class="btn btn-primary">홈</a>
     </div>
 </div>
 

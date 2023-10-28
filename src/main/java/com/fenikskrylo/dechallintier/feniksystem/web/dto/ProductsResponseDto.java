@@ -25,7 +25,7 @@ public class ProductsResponseDto {
     private boolean registered = true;
     private int inStock;
 
-    public ProductsResponseDto(Products entity){
+    public ProductsResponseDto(Products entity) {
         this.id = entity.getId();
         this.barcodeId = entity.getBarcodeId();
         this.productName = entity.getProductName();
@@ -41,7 +41,7 @@ public class ProductsResponseDto {
         this.modifiedDate = entity.getModifiedDate();
     }
 
-    public ProductsResponseDto(Products entity, int inStock){
+    public ProductsResponseDto(Products entity, int inStock) {
         this.id = entity.getId();
         this.barcodeId = entity.getBarcodeId();
         this.productName = entity.getProductName();
@@ -58,7 +58,7 @@ public class ProductsResponseDto {
         this.inStock = inStock;
     }
 
-    public ProductsResponseDto(boolean result){
+    public ProductsResponseDto(boolean result) {
         this.registered = result;
     }
 }

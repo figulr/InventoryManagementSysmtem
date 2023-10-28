@@ -35,13 +35,13 @@ public class ProductsController {
     private final ProductPriceService productPriceService;
 
     @GetMapping("/product/register")
-    public String productRegister(Model model){
+    public String productRegister(Model model) {
         EnumSet<PurchaseAt> list = EnumSet.allOf(PurchaseAt.class);
         EnumSet<Unit> unit = EnumSet.allOf(Unit.class);
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         User member = (User) authentication.getPrincipal();
         String userName = memberService.getName(member.getUsername());
-        if(member != null){
+        if (member != null) {
             model.addAttribute("userName", userName);
         }
         model.addAttribute("list", list);
@@ -50,41 +50,42 @@ public class ProductsController {
     }
 
     @GetMapping("/product/detail/{barcode}")
-    public String productDetail(Model model, @PathVariable long barcode){
+    public String productDetail(Model model, @PathVariable long barcode) {
         ProductsResponseDto dto = productsService.findByBarcodeId(barcode);
         ProductStockResponseDto stockDto = productStockService.latestLog(barcode);
-        if(productPriceService.checkHistory(barcode)){
+        if (productPriceService.checkHistory(barcode)) {
             List<ProductPriceResponseDto> priceDto = productPriceService.latestLog(barcode);
-            model.addAttribute("priceList", priceDto);}
-        else {
+            model.addAttribute("priceList", priceDto);
+        } else {
             ProductPriceResponseDto nonePriceDto =
                     new ProductPriceResponseDto(productPriceService.checkHistory(barcode));
             List<ProductPriceResponseDto> nonePirceList = new ArrayList<>();
             nonePirceList.add(nonePriceDto);
             model.addAttribute("priceList", nonePirceList);
-        };
+        }
+        ;
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         User member = (User) authentication.getPrincipal();
         String userName = memberService.getName(member.getUsername());
-        if(member != null){
+        if (member != null) {
             model.addAttribute("userName", userName);
         }
-        model.addAttribute("product",dto);
+        model.addAttribute("product", dto);
         model.addAttribute("stock", stockDto);
         return "product/detail";
 
     }
 
     @GetMapping("/product/search")
-    public String searchPage(){
+    public String searchPage() {
         return "product/search";
     }
 
     // search manage
     @GetMapping("/product/search.api")
-    public String productSearch(ProductsSearchRequestDto dto, Model model){
+    public String productSearch(ProductsSearchRequestDto dto, Model model) {
         List<ProductsResponseDto> productsList = new ArrayList<>();
-        switch (dto.getSearchType()){
+        switch (dto.getSearchType()) {
             case "productName":
                 productsList = productsService.searchProductName(dto.getSearchValue());
                 break;
@@ -100,20 +101,20 @@ public class ProductsController {
 
 
     @GetMapping("/product/list")
-    public String productList(Model model){
+    public String productList(Model model) {
         model.addAttribute("list", productsService.findAllDesc());
         return "product/list";
     }
 
     // 재고리스트
     @GetMapping("/product/in-stock")
-    public String productStockList(Model model){
+    public String productStockList(Model model) {
         model.addAttribute("list", productStockService.stockList());
         return "product/in-stock";
     }
 
     @GetMapping("/product/update/{id}")
-    public String productEdit(@PathVariable Long id, Model model){
+    public String productEdit(@PathVariable Long id, Model model) {
         ProductsResponseDto dto = productsService.findById(id);
         System.out.println(dto);
         model.addAttribute("product", dto);
@@ -121,11 +122,11 @@ public class ProductsController {
     }
 
     @GetMapping("/product/in-out/{mode}")
-    public String productInOut(Model model, @PathVariable String mode){
+    public String productInOut(Model model, @PathVariable String mode) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         User member = (User) authentication.getPrincipal();
         String userName = memberService.getName(member.getUsername());
-        if(member != null){
+        if (member != null) {
             model.addAttribute("userName", userName);
         }
         model.addAttribute("mode", mode);
@@ -133,12 +134,12 @@ public class ProductsController {
     }
 
     @GetMapping("/product/inout-result/{stringDate}")
-    public String productInoutResult(Model model, @PathVariable String stringDate){
+    public String productInoutResult(Model model, @PathVariable String stringDate) {
         List<ProductStockResponseDto> list;
         LocalDate date = LocalDate.parse(stringDate, DateTimeFormatter.ISO_DATE);
-        if(date!=LocalDate.now()) {
+        if (date != LocalDate.now()) {
             list = productStockService.dailyStockLog(date);
-        } else{
+        } else {
             list = productStockService.dailyStockLog(LocalDate.now());
         }
         model.addAttribute("list", list);

@@ -28,41 +28,43 @@ public class ProductsAPIController {
 
     @ResponseBody
     @GetMapping("/api/v1/register/check/{barcode}")
-    public boolean check(@PathVariable long barcode){
+    public boolean check(@PathVariable long barcode) {
         return productsService.check(barcode);
     }
+
     // url 모두 동일해도 Mapping 방식이 다르다면 괜찮다.
     @PostMapping("/api/v1/register")
-    public boolean register(@RequestBody ProductsSaveRequestDto requestDto){
+    public boolean register(@RequestBody ProductsSaveRequestDto requestDto) {
         return productsService.save(requestDto);
     }
 
     @PutMapping("/api/v1/update/{id}")
-    public Long update(@PathVariable Long id, @RequestBody ProductsUpdateRequestDto requestDto){
-        return productsService.update(id, requestDto);}
+    public Long update(@PathVariable Long id, @RequestBody ProductsUpdateRequestDto requestDto) {
+        return productsService.update(id, requestDto);
+    }
 
     @DeleteMapping("/api/v1/delete/{id}")
-    public Long delete(@PathVariable Long id){
+    public Long delete(@PathVariable Long id) {
         productsService.delete(id);
         return id;
     }
 
     @GetMapping("/api/v1/product/{id}")
-    public ProductsResponseDto findById(@PathVariable Long id){
+    public ProductsResponseDto findById(@PathVariable Long id) {
         return productsService.findById(id);
     }
 
 
     // stock manage
     @PostMapping("/api/v1/stock/{barcode}")
-    public Long stockSave(@RequestBody ProductStockUpdateDto stockDto){
+    public Long stockSave(@RequestBody ProductStockUpdateDto stockDto) {
         return productStockService.save(stockDto);
     }
 
     // in-out 조회
     @ResponseBody
     @GetMapping("/api/v1/stock/check/{barcode}")
-    public ProductsResponseDto intoList(@PathVariable Long barcode){
+    public ProductsResponseDto intoList(@PathVariable Long barcode) {
         ProductsResponseDto productDto = productsService.findByBarcodeId(barcode);
         Products product = Products.builder()
                 .id(productDto.getId())
@@ -86,18 +88,19 @@ public class ProductsAPIController {
     // into stock
     @ResponseBody
     @PostMapping("/api/v1/stock/in")
-    public SimpleMassStockResponseDto stockIn (@RequestBody String data) throws IOException {
+    public SimpleMassStockResponseDto stockIn(@RequestBody String data) throws IOException {
         ObjectMapper mapper = new ObjectMapper();
         List<Map<String, String>> list =
-                mapper.readValue(data, new TypeReference<List<Map<String, String>>>(){});
+                mapper.readValue(data, new TypeReference<List<Map<String, String>>>() {
+                });
         ArrayList<Long> barcodeList = new ArrayList<>();
-        for(int i=0; i<list.size(); i++){
+        for (int i = 0; i < list.size(); i++) {
             long barcode = Long.parseLong(list.get(i).get("barcodeId"));
             int inStock = Integer.parseInt(list.get(i).get("inStock"));
             int stockAdd = Integer.parseInt(list.get(i).get("stockAdd"));
             int stockSub = Integer.parseInt(list.get(i).get("stockSub"));
             String name = list.get(i).get("name");
-            System.out.println(barcode+inStock+stockAdd+stockSub+name);
+            System.out.println(barcode + inStock + stockAdd + stockSub + name);
             ProductStockUpdateDto stockDto = ProductStockUpdateDto.builder()
                     .barcodeId(barcode)
                     .inStock(inStock)
@@ -105,11 +108,11 @@ public class ProductsAPIController {
                     .stockSub(stockSub)
                     .name(name)
                     .build();
-            if(productStockService.save(stockDto) == 0L){
+            if (productStockService.save(stockDto) == 0L) {
                 barcodeList.add(barcode);
             }
         }
-        if(barcodeList.isEmpty()) {
+        if (barcodeList.isEmpty()) {
             return new SimpleMassStockResponseDto(true);
         } else {
             return new SimpleMassStockResponseDto(barcodeList, false);
@@ -121,7 +124,7 @@ public class ProductsAPIController {
     // price manage
     // @ResponseBody
     @PostMapping("/api/v1/price/{barcode}")
-    public Long priceUpdate(@RequestBody ProductPriceUpdateDto priceDto){
+    public Long priceUpdate(@RequestBody ProductPriceUpdateDto priceDto) {
         return productsService.priceUpdate(priceDto.getId(), priceDto.getUpdatedPrice(), priceDto.getName(), priceDto);
     }
 

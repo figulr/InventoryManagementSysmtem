@@ -20,7 +20,7 @@ public class ProductsUpdateRequestDto {
     @Builder
     public ProductsUpdateRequestDto(String productName, long price, String weight, String unit, String volumeLong,
                                     String volumeShort,
-                                    String volumeHeight){
+                                    String volumeHeight) {
         this.productName = productName;
         this.price = price;
         this.weight = weight;
@@ -29,10 +29,11 @@ public class ProductsUpdateRequestDto {
         this.volumeShort = volumeShort;
         this.volumeHeight = volumeHeight;
     }
+
     @Builder
-    public ProductsUpdateRequestDto(String productName, String weight,  String volumeLong,
+    public ProductsUpdateRequestDto(String productName, String weight, String volumeLong,
                                     String volumeShort,
-                                    String volumeHeight){
+                                    String volumeHeight) {
         this.productName = productName;
         this.weight = weight;
         this.volumeLong = volumeLong;

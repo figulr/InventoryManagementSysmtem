@@ -13,5 +13,4 @@ public interface MemberService extends UserDetailsService {
     String getName(String email);
 
 
-
 }

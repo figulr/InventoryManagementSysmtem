@@ -78,7 +78,7 @@ public class Products extends BaseTimeEntity {
 
     public void update(String productName, long price, String weight, String unit, String volumeLong,
                        String volumeShort,
-                       String volumeHeight){
+                       String volumeHeight) {
         this.productName = productName;
         this.price = price;
         this.weight = weight;
@@ -90,7 +90,7 @@ public class Products extends BaseTimeEntity {
 
     public void update(String productName, String weight, String volumeLong,
                        String volumeShort,
-                       String volumeHeight){
+                       String volumeHeight) {
         this.productName = productName;
         this.weight = weight;
         this.volumeLong = volumeLong;
@@ -98,7 +98,7 @@ public class Products extends BaseTimeEntity {
         this.volumeHeight = volumeHeight;
     }
 
-    public void update(long price){
+    public void update(long price) {
         this.price = price;
     }
 

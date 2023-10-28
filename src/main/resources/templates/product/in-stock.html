@@ -20,24 +20,25 @@
     </div>
 </div>
 <div th:unless="${#lists.isEmpty(list)}" class="body-content">
-<table class="table table-horizontal table-bordered">
-    <thead class="thead-strong">
+    <table class="table table-horizontal table-bordered">
+        <thead class="thead-strong">
         <tr>
             <th>barcode</th>
             <th>브랜드</th>
             <th>제품명</th>
             <th>재고</th>
         </tr>
-    </thead>
-    <tbody id="tbody">
+        </thead>
+        <tbody id="tbody">
         <tr th:each="x : ${list}">
             <td th:text="${x.barcodeId}">barcode</td>
             <td th:text="${x.brand}">brand</td>
-            <td ><a th:href="'/product/detail/'+${x.barcodeId}" th:text="${x.productName}" target='_blank'>product name</a></td>
+            <td><a th:href="'/product/detail/'+${x.barcodeId}" th:text="${x.productName}" target='_blank'>product
+                name</a></td>
             <td th:text="${x.inStock}"></td>
         </tr>
-    </tbody>
-</table>
+        </tbody>
+    </table>
 </div>
 <div th:if="${#lists.isEmpty(list)}">
     <tr>

@@ -44,8 +44,8 @@ public class ProductStockServiceImpl implements ProductStockService {
     @Override
     public ProductStockResponseDto latestLog(long barcode) {
         Optional<StockLog> optionalStockLog = stockLogRepository.findFirstByBarcodeIdOrderByCreatedDateDesc(barcode);
-        if(!optionalStockLog.isPresent()){
-            ProductStockResponseDto dto =ProductStockResponseDto.builder().inStock(0).barcodeId(barcode).build();
+        if (!optionalStockLog.isPresent()) {
+            ProductStockResponseDto dto = ProductStockResponseDto.builder().inStock(0).barcodeId(barcode).build();
             return dto;
         }
         StockLog stockLog = optionalStockLog.get();
@@ -59,26 +59,26 @@ public class ProductStockServiceImpl implements ProductStockService {
         // int zero = 0;
         Optional<List<StockLog>> optionalStockLog =
                 stockLogRepository.find();
-        if(!optionalStockLog.isPresent()){
+        if (!optionalStockLog.isPresent()) {
             return Collections.emptyList();
         }
         List<StockLog> stockLog = optionalStockLog.get();
         List<ProductStockResponseDto> responseDtos = new ArrayList<>();
         List<Long> _barcodeList = new ArrayList<>();
         List<LocalDateTime> _createdDate = new ArrayList<>();
-        for(StockLog stock : stockLog){
+        for (StockLog stock : stockLog) {
             Optional<Products> optionalProducts = productsRepository.findByBarcodeId(stock.getBarcodeId());
-            if(!optionalProducts.isPresent()){
-                System.out.println("이 상품은 검색이 안된다."+stock.getBarcodeId());
+            if (!optionalProducts.isPresent()) {
+                System.out.println("이 상품은 검색이 안된다." + stock.getBarcodeId());
             } else {
                 // 중복 체크
                 long barcodeId = stock.getBarcodeId();
                 LocalDateTime createdDate = stock.getCreatedDate();
                 // 이미 바코드가 있으면
-                if(_barcodeList.contains(barcodeId)){
+                if (_barcodeList.contains(barcodeId)) {
                     int j = _barcodeList.indexOf(barcodeId);
                     // 이미 등록된 바코드가 예전거라면
-                    if(_createdDate.get(j).isBefore(createdDate)){
+                    if (_createdDate.get(j).isBefore(createdDate)) {
                         // 날짜 지금걸로 새롭게 세팅
                         _createdDate.set(j, createdDate);
                         // 저장
@@ -87,7 +87,7 @@ public class ProductStockServiceImpl implements ProductStockService {
                         String brand = products.getBrand();
                         ProductStockResponseDto dto = new ProductStockResponseDto(stock, productName, brand);
                         responseDtos.set(j, dto);
-                    } else{
+                    } else {
                         // 아니면 이번 건 패스
                     }
                 } else {
@@ -111,18 +111,18 @@ public class ProductStockServiceImpl implements ProductStockService {
     public List<ProductStockResponseDto> dailyStockLog(LocalDate date) {
         Optional<List<StockLog>> optionalList =
                 stockLogRepository.findByCreatedDateBetweenOrderByCreatedDateDesc(date.atStartOfDay(),
-                date.atStartOfDay().plusDays(1));
+                        date.atStartOfDay().plusDays(1));
 
-        if(!optionalList.isPresent()){
+        if (!optionalList.isPresent()) {
             return Collections.emptyList();
         }
         List<StockLog> stockLog = optionalList.get();
         List<ProductStockResponseDto> responseDtos = new ArrayList<>();
 
-        for(StockLog stock : stockLog){
+        for (StockLog stock : stockLog) {
             Optional<Products> optionalProducts = productsRepository.findByBarcodeId(stock.getBarcodeId());
-            if(!optionalProducts.isPresent()){
-                System.out.println("이 상품은 검색이 안된다."+stock.getBarcodeId());
+            if (!optionalProducts.isPresent()) {
+                System.out.println("이 상품은 검색이 안된다." + stock.getBarcodeId());
             } else {
                 // 저장
                 Products products = optionalProducts.get();

@@ -1,6 +1,6 @@
 var background = {
 
-     const :  listener = (event) => {
+    const: listener = (event) => {
         event.preventDefault();
         event.returnValue = '';
     },
@@ -8,7 +8,7 @@ var background = {
         window.addEventListener('beforeunload', listener);
     },
 
-    offProtect: function(){
+    offProtect: function () {
         window.removeEventListener('beforeunload', listener);
     }
 }

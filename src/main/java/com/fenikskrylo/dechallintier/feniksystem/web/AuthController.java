@@ -20,15 +20,15 @@ public class AuthController {
     private final PasswordEncoder passwordEncoder;
 
     @GetMapping("/auth/register")
-    public String userRegister(Model model){
+    public String userRegister(Model model) {
         model.addAttribute("userFormDto", new UserFormDto());
         return "auth/register";
     }
 
     @RequestMapping("/auth/login")
-    public String login(){
+    public String login() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if(authentication.isAuthenticated()){
+        if (authentication.isAuthenticated()) {
             return "auth/login";
         } else {
             return "redirect:/";

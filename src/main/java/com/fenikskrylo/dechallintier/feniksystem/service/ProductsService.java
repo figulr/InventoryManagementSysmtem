@@ -23,10 +23,10 @@ public class ProductsService {
     private final ProductStockService productStockService;
 
     @Transactional
-    public boolean save(ProductsSaveRequestDto requestDto){
+    public boolean save(ProductsSaveRequestDto requestDto) {
         long barcodeId = requestDto.getBarcodeId();
         Optional<Products> optionalProducts = productsRepository.findByBarcodeId(barcodeId);
-        if(optionalProducts.isPresent()){
+        if (optionalProducts.isPresent()) {
             return false;
         }
         productsRepository.save(requestDto.toEntity());
@@ -34,10 +34,10 @@ public class ProductsService {
     }
 
     @Transactional
-    public Long update(Long id, ProductsUpdateRequestDto requestDto){
+    public Long update(Long id, ProductsUpdateRequestDto requestDto) {
         Products products =
-                productsRepository.findById(id).orElseThrow(()-> new IllegalArgumentException("제품이 " +
-                "존재하지 않습니다."));
+                productsRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("제품이 " +
+                        "존재하지 않습니다."));
         products.update(
                 requestDto.getProductName(),
                 requestDto.getWeight(),
@@ -52,8 +52,8 @@ public class ProductsService {
     public Long priceUpdate(Long id, long price,
 //                            @LoginUser  SessionUser user,
                             String name,
-                            ProductPriceUpdateDto priceDto){
-        Products product = productsRepository.findById(id).orElseThrow(()-> new IllegalArgumentException("제품이 존재하지 " +
+                            ProductPriceUpdateDto priceDto) {
+        Products product = productsRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("제품이 존재하지 " +
                 "않습니다."));
         long presentPrice = product.getPrice();
         priceDto.setName(name);
@@ -65,25 +65,25 @@ public class ProductsService {
     }
 
     @Transactional
-    public void delete(Long id){
+    public void delete(Long id) {
         Products product = productsRepository.findById(id)
-                .orElseThrow(()-> new IllegalArgumentException("제품이 존재하지 않습니다. i d= "+id));
+                .orElseThrow(() -> new IllegalArgumentException("제품이 존재하지 않습니다. i d= " + id));
         productsRepository.delete(product);
     }
 
-    public ProductsResponseDto findById(Long id){
-        Products entity = productsRepository.findById(id).orElseThrow(()-> new IllegalArgumentException("제품이 존재하지 " +
-                "않습니다. id = "+ id));
+    public ProductsResponseDto findById(Long id) {
+        Products entity = productsRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("제품이 존재하지 " +
+                "않습니다. id = " + id));
         return new ProductsResponseDto(entity);
     }
 
-    public ProductsResponseDto findByBarcodeId(long barcodeId){
+    public ProductsResponseDto findByBarcodeId(long barcodeId) {
         Optional<Products> optionalEntity = productsRepository.findByBarcodeId(barcodeId);
-        if(!optionalEntity.isPresent()){
+        if (!optionalEntity.isPresent()) {
             System.out.println("Optional 진입");
             boolean result = false;
             return new ProductsResponseDto(result);
-        }else{
+        } else {
             Products entity = optionalEntity.get();
             return new ProductsResponseDto(entity);
         }
@@ -91,10 +91,10 @@ public class ProductsService {
 
 
     @Transactional(readOnly = true)
-    public List<ProductsResponseDto> searchProductName(String productName){
+    public List<ProductsResponseDto> searchProductName(String productName) {
         Optional<List<Products>> optionalProductsResponseDtoList =
                 productsRepository.findByProductNameContaining(productName);
-        if(!optionalProductsResponseDtoList.isPresent()){
+        if (!optionalProductsResponseDtoList.isPresent()) {
             return Collections.emptyList();
         }
         List<Products> productsList = optionalProductsResponseDtoList.get();
@@ -102,10 +102,10 @@ public class ProductsService {
     }
 
     @Transactional(readOnly = true)
-    public List<ProductsResponseDto> searchBrand(String brand){
+    public List<ProductsResponseDto> searchBrand(String brand) {
         Optional<List<Products>> optionalProductsResponseDtoList =
                 productsRepository.findByBrandContaining(brand);
-        if(!optionalProductsResponseDtoList.isPresent()){
+        if (!optionalProductsResponseDtoList.isPresent()) {
             return Collections.emptyList();
         }
         List<Products> productsList = optionalProductsResponseDtoList.get();
@@ -114,16 +114,17 @@ public class ProductsService {
     }
 
     @Transactional(readOnly = true)
-    public List<ProductsListResponseDto> findAllDesc(){
+    public List<ProductsListResponseDto> findAllDesc() {
         return productsRepository.findAllDesc().stream()
                 .map(ProductsListResponseDto::new)
                 .collect(Collectors.toList());
     }
+
     @Transactional(readOnly = true)
     public boolean check(long barcode) {
         System.out.println("check 진입");
         Optional<Products> optionalProducts = productsRepository.findByBarcodeId(barcode);
-        if(optionalProducts.isPresent()){
+        if (optionalProducts.isPresent()) {
             return false;
         }
         return true;

@@ -21,18 +21,18 @@ public class MainController {
     private final MemberService memberService;
 
     @GetMapping("/")
-    public String index(Model model){
+    public String index(Model model) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         User member = (User) authentication.getPrincipal();
         String userName = memberService.getName(member.getUsername());
-        if(member != null){
+        if (member != null) {
             model.addAttribute("userName", userName);
         }
         return "index";
     }
 
     @GetMapping("/error")
-    public String error(){
+    public String error() {
         return "error";
     }
 }

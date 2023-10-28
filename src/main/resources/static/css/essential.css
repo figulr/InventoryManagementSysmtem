@@ -4,32 +4,38 @@ body {
     min-height: 100vw;
     margin: 0 auto;
     text-align: center;
-    background-color: #f2f2f2 ;
+    background-color: #f2f2f2;
 }
 
-.login-btn{
-    display : flex;
+.login-btn {
+    display: flex;
     margin-top: 30px;
     justify-content: center;
 }
-.login-btn a{
-    width : 300px
+
+.login-btn a {
+    width: 300px
 }
+
 .header-logo {
 }
+
 .header-btn {
     /*display: flex;*/
     /*justify-content: right;*/
     text-align: right;
     padding: 0 10px;
 }
+
 h1 {
     margin-top: 30px;
     text-align: center;
 }
+
 h1 a {
     color: black;
 }
+
 h1 a:hover {
     color: black;
     text-decoration: none;
@@ -38,7 +44,8 @@ h1 a:hover {
 h3 {
     margin-bottom: 20px;
 }
-input{
+
+input {
     max-width: 300px;
     width: 55%;
 }
@@ -70,10 +77,12 @@ input{
     background-color: white;
     border-radius: 5px;
 }
+
 .error {
     border: 2px solid mediumvioletred;
 }
-.error p{
+
+.error p {
     font-size: 18px;
     color: mediumvioletred;
     font-weight: bold;
@@ -85,40 +94,49 @@ input{
     width: 100px;
     text-align: left;
 }
-.input-register{
+
+.input-register {
     display: inline-block;
     width: 300px;
 }
+
 table {
     font-size: 12px;
     width: 100%;
     table-layout: fixed;
 }
+
 th {
     width: 100%;
     text-overflow: ellipsis;
     background-color: #002147;
     color: white;
 }
+
 td {
     width: 100%;
     overflow: auto;
     background-color: white;
 }
-td input{
+
+td input {
     width: 100%;
 }
-.row-group{
+
+.row-group {
     display: flex;
     justify-content: space-between;
 }
-.half-form-group{
+
+.half-form-group {
     width: 50%;
 }
-.half-form-group button{
+
+.half-form-group button {
     width: 90%;
 }
-.half-form-group .input-register{
+
+.half-form-group .input-register {
     width: 40%;
 }
 

@@ -13,7 +13,7 @@ public interface ProductsRepository extends JpaRepository<Products, Long> {
 
     Optional<Products> findByBarcodeId(long barcodeId);
 
-//    @Query("SELECT p FROM Products p WHERE p.productName like ?1")
+    //    @Query("SELECT p FROM Products p WHERE p.productName like ?1")
     Optional<List<Products>> findByBarcodeIdContaining(long barcodeId);
 
     Optional<List<Products>> findByProductNameContaining(String productName);

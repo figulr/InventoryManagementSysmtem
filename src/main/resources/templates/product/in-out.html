@@ -24,12 +24,12 @@
     <div class="form-group">
         <div th:if="${mode == 'in'}" class="row-group">
             <div class="half-form-group">
-                    <a class="btn btn-half" id="btn-stock-in" href="/product/in-out/in"
-                       style="background-color: blue; color: #f2f2f2">입 고</a>
+                <a class="btn btn-half" id="btn-stock-in" href="/product/in-out/in"
+                   style="background-color: blue; color: #f2f2f2">입 고</a>
             </div>
             <div class="half-form-group">
                 <a class="btn btn-half" id="btn-stock-out" href="/product/in-out/out"
-                    style="background-color:
+                   style="background-color:
                 darkred; color:
                 #f2f2f2">출
                     고</a>
@@ -42,7 +42,7 @@
         <div th:if="${mode == 'out'}" class="row-group">
             <div class="half-form-group">
                 <a class="btn btn-half" id="btn-stock-in"
-                         style="background-color: darkblue; color: #f2f2f2" href="/product/in-out/in">입 고</a>
+                   style="background-color: darkblue; color: #f2f2f2" href="/product/in-out/in">입 고</a>
             </div>
             <div class="half-form-group">
                 <a class="btn btn-half" id="btn-stock-out" href="/product/in-out/out"
@@ -56,19 +56,20 @@
             </script>
         </div>
     </div>
+</div>
+<div class="unit-function">
+    <h3 th:if="${mode == 'in'}" id="mode">입고</h3>
+    <h3 th:if="${mode == 'out'}" id="mode">출고</h3>
+    <div class="form-group">
+        <input type="barcode" name="barcode" id="searchBarcode">
     </div>
-        <div class="unit-function">
-            <h3 th:if="${mode == 'in'}" id="mode">입고</h3>
-            <h3 th:if="${mode == 'out'}" id="mode">출고</h3>
-                <div class="form-group">
-                    <input type="barcode" name="barcode" id="searchBarcode">
-                </div>
-                <button class="btn btn-primary" id="btn-in">검색</button>
-<!--                <button role="button" type="submit" id="btn-search" class="btn btn-primary" hidden>검색</button>-->
-        </div>
-    <div class="unit-function">
+    <button class="btn btn-primary" id="btn-in">검색</button>
+    <!--                <button role="button" type="submit" id="btn-search" class="btn btn-primary" hidden>검색</button>-->
+</div>
+<div class="unit-function">
     <button th:if="${mode == 'in'}" class="btn" style="background-color: orangered; color: #fff"
-            id="btn-in-complete">입고요청</button>
+            id="btn-in-complete">입고요청
+    </button>
     <button th:if="${mode == 'out'}" class="btn" style="background-color: green; color: #fff "
             id="btn-out-complete">출고요청
     </button>
@@ -85,22 +86,22 @@
             <th>수량</th>
         </tr>
         </thead>
-<!--        <tbody th:unless="${#lists.isEmpty(list)}" id="tbody">-->
-<!--        <tr th:each="x : ${list}">-->
-<!--            <td>no</td>-->
-<!--            <td th:text="${x.id}" hidden>id</td>-->
-<!--            <td th:text="${x.barcodeId}">barcode</td>-->
-<!--            <td ><a th:href="'/product/detail/'+${x.barcodeId}" th:text="${x.productName}" target='_blank'>product name</a></td>-->
-<!--            <td th:text="${x.brand}">brand</td>-->
-<!--            <td th:text="${x.price}">price</td>-->
-<!--            <th th:text="${x.inStock}">inSotck</th>-->
-<!--            <td>-->
-<!--                <input type="number" value="1" min="1">-->
-<!--            </td>-->
-<!--        </tr>-->
+        <!--        <tbody th:unless="${#lists.isEmpty(list)}" id="tbody">-->
+        <!--        <tr th:each="x : ${list}">-->
+        <!--            <td>no</td>-->
+        <!--            <td th:text="${x.id}" hidden>id</td>-->
+        <!--            <td th:text="${x.barcodeId}">barcode</td>-->
+        <!--            <td ><a th:href="'/product/detail/'+${x.barcodeId}" th:text="${x.productName}" target='_blank'>product name</a></td>-->
+        <!--            <td th:text="${x.brand}">brand</td>-->
+        <!--            <td th:text="${x.price}">price</td>-->
+        <!--            <th th:text="${x.inStock}">inSotck</th>-->
+        <!--            <td>-->
+        <!--                <input type="number" value="1" min="1">-->
+        <!--            </td>-->
+        <!--        </tr>-->
         </tbody>
     </table>
-        </div>
+</div>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>

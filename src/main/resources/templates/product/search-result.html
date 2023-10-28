@@ -51,7 +51,8 @@
         <tr th:each="x : ${list}">
             <td th:text="${x.id}">id</td>
             <td th:text="${x.barcodeId}">barcode</td>
-            <td ><a th:href="'/product/detail/'+${x.barcodeId}" th:text="${x.productName}" target='_blank'>product name</a></td>
+            <td><a th:href="'/product/detail/'+${x.barcodeId}" th:text="${x.productName}" target='_blank'>product
+                name</a></td>
             <td th:text="${x.brand}">brand</td>
             <td th:text="${x.price}">price</td>
             <td th:text="${x.createdDate}">created Date</td>
@@ -60,9 +61,9 @@
         </tbody>
         <div th:if="${#lists.isEmpty(list)}">
             <p>검색결과가 존재하지 않습니다.</p>
-<!--                <tr>-->
-<!--                    <td colspan="7">검색결과가 존재하지 않습니다.</td>-->
-<!--                </tr>-->
+            <!--                <tr>-->
+            <!--                    <td colspan="7">검색결과가 존재하지 않습니다.</td>-->
+            <!--                </tr>-->
         </div>
     </table>
 </div>

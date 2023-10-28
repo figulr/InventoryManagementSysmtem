@@ -12,7 +12,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
 
-@Getter @Setter
+@Getter
+@Setter
 @Table(name = "member")
 @NoArgsConstructor
 @Entity
@@ -35,7 +36,7 @@ public class Member extends BaseTimeEntity {
     private Role role;
 
 
-    public static Member createUser(UserFormDto userFormDto,PasswordEncoder passwordEncoder){
+    public static Member createUser(UserFormDto userFormDto, PasswordEncoder passwordEncoder) {
         Member member = new Member();
         member.setEmail(userFormDto.getEmail());
         member.setName(userFormDto.getName());
@@ -47,18 +48,18 @@ public class Member extends BaseTimeEntity {
     }
 
     @Builder
-    public Member(String name, String email, Role role){
+    public Member(String name, String email, Role role) {
         this.name = name;
         this.email = email;
         this.role = role;
     }
 
-    public Member update(String name){
+    public Member update(String name) {
         this.name = name;
         return this;
     }
 
-    public String getRoleKey(){
+    public String getRoleKey() {
         return this.role.getKey();
     }
 }
