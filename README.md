@@ -16,3 +16,4 @@ Product-Inventory Management System
 위 문제들을 해결하기 위해 웹 기반으로 작동하는 재고관리 시스템을 기획하게 됐다.
 
 ## 주요 기능
+1. 입출고 기능
