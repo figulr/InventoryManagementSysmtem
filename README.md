@@ -15,11 +15,18 @@ Product-Inventory Management System
       
 위 문제들을 해결하기 위해 웹 기반으로 작동하는 재고관리 시스템을 기획하게 됐다.
 
+## 주요 아키텍처
+1. 회원 시스템 아기텍처
+<img width="500" alt="회원시스템 아키텍처" src="https://github.com/figulr/PMS.FeniksKrylo/assets/66729342/883a4a6b-30bf-4e44-a733-329b1fca26f6">
+
+2. 물품 시스템 아키텍처
+<img width="500" alt="재고시스템 아키텍처" src="https://github.com/figulr/PMS.FeniksKrylo/assets/66729342/10287f76-c426-4f01-9b64-7c23e7dda12d">
+
 ## 주요 기능
 1. 바코드 스캐너를 이용한 간편 입출고 기능
-<img width="315" height ="700" alt="PMS 입고페이지" src="https://github.com/figulr/PMS.FeniksKrylo/assets/66729342/3c17c1c2-f97d-4b7a-aa5f-0f17da512144">
-<img width="315" height ="700" alt="바코드 입력 후 물품 리스트에 추가" src="https://github.com/figulr/PMS.FeniksKrylo/assets/66729342/0201dc77-7e7c-41ea-a98a-f8e843ed6879">
-<img width="315" height ="700" alt="바코드 재입력 시 물품 수량 증가" src="https://github.com/figulr/PMS.FeniksKrylo/assets/66729342/c8c66949-3e02-4fe9-a517-069f051b971c">
+<img width="200" height ="440" alt="PMS 입고페이지" src="https://github.com/figulr/PMS.FeniksKrylo/assets/66729342/3c17c1c2-f97d-4b7a-aa5f-0f17da512144">
+<img width="200" height ="440" alt="바코드 입력 후 물품 리스트에 추가" src="https://github.com/figulr/PMS.FeniksKrylo/assets/66729342/0201dc77-7e7c-41ea-a98a-f8e843ed6879">
+<img width="200" height ="440" alt="바코드 재입력 시 물품 수량 증가" src="https://github.com/figulr/PMS.FeniksKrylo/assets/66729342/c8c66949-3e02-4fe9-a517-069f051b971c">
 
 1-1. 페이지에 들어오면 바코드 입력란에 커서가 활성화 되도록 해 물품 바코드 스캔을 바로 진행할 수 있습니다.<br>
 1-2. 바코드 스태너로 물품의 바코드를 스캔하면 비동기 통신으로 데이터를 조회한 후 목록에 물품을 추가합니다. 추가 완료후에도 바코드 입력란에 커서가 활성화 돼 다음 물품 스캔을 바로 이어서 할 수 있습니다.<br>
@@ -27,8 +34,8 @@ Product-Inventory Management System
 
 
 2. 입고요청, 출고요청 버튼
-<img width="314" alt="PMS 입고페이지" src="https://github.com/figulr/PMS.FeniksKrylo/assets/66729342/3c17c1c2-f97d-4b7a-aa5f-0f17da512144">
-<img width="314" alt="PMS 출고페이지" src="https://github.com/figulr/PMS.FeniksKrylo/assets/66729342/18c16c99-5f14-4a3a-9d8f-71cd529f4053">
+<img width="200" height ="440" alt="PMS 입고페이지" src="https://github.com/figulr/PMS.FeniksKrylo/assets/66729342/3c17c1c2-f97d-4b7a-aa5f-0f17da512144">
+<img width="200" height ="440" alt="PMS 출고페이지" src="https://github.com/figulr/PMS.FeniksKrylo/assets/66729342/18c16c99-5f14-4a3a-9d8f-71cd529f4053">
 
 2-1. 입고물품과 출고물품을 모두 스캔 한 뒤 각각 입고요청, 출고요청 버튼을 눌러 입고와 출고 작업을 마무리 합니다. 이를 통해서 데이터 수정 요청을 한 번으로 줄였습니다.<br>
 
