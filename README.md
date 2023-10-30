@@ -15,12 +15,16 @@ Product-Inventory Management System
       
 위 문제들을 해결하기 위해 웹 기반으로 작동하는 재고관리 시스템을 기획하게 됐다.
 
-## 주요 아키텍처
-1. 회원 시스템 아기텍처
-<img width="500" alt="회원시스템 아키텍처" src="https://github.com/figulr/PMS.FeniksKrylo/assets/66729342/883a4a6b-30bf-4e44-a733-329b1fca26f6">
+## 플로우 차트와 주요 아키텍처
+1. 플로우 차트
+![pms_flowchart](https://github.com/figulr/PMS.FeniksKrylo/assets/66729342/85ab250f-917b-49ac-a197-71d6a93425f1)
 
-2. 물품 시스템 아키텍처
-<img width="500" alt="재고시스템 아키텍처" src="https://github.com/figulr/PMS.FeniksKrylo/assets/66729342/10287f76-c426-4f01-9b64-7c23e7dda12d">
+2. 회원 시스템 아기텍처
+![회원시스템_아키텍처](https://github.com/figulr/PMS.FeniksKrylo/assets/66729342/883a4a6b-30bf-4e44-a733-329b1fca26f6)
+
+3. 물품 시스템 아키텍처
+![재고시트메 아키텍처](https://github.com/figulr/PMS.FeniksKrylo/assets/66729342/10287f76-c426-4f01-9b64-7c23e7dda12d)
+
 
 ## 주요 기능
 1. 바코드 스캐너를 이용한 간편 입출고 기능
