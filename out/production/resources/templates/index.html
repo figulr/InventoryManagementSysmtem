@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<!--      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">-->
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>PMS</title>
+    <!-- Bootstrap -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <link th:href="@{/css/essential.css}" rel="stylesheet">
+</head>
+<body>
+<!--<div th:if="${userName eq null}">-->
+<!--    <div class="header-logo" th:replace="fragments/header.html :: logo"></div>-->
+<!--    <div class="login-btn">-->
+<!--        <a href="/oauth2/authorization/naver" class="btn btn-success active"  role="button">NAVER Login</a>-->
+<!--    </div>-->
+<!--</div>-->
+<!--<div th:if="${userName}">-->
+<div>
+    <div class="header-logo" th:replace="fragments/header.html :: logo"></div>
+    <div class="header-btn" th:if="${userName}">
+        <span th:text="${userName}"></span>
+        <span th:replace="fragments/header.html :: logout"></span>
+        <hr/>
+    </div>
+    <div class="body-content">
+        <!--        <div class="unit-function">-->
+        <!--            <h3>상품 조회</h3>-->
+        <!--            <div class="form-group">-->
+        <!--                <form>-->
+        <!--                    <label for="search-barcodeId" >바코드</label>-->
+        <!--                    <input type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g,-->
+        <!--                    '$1');" id="search-barcodeId" placeholder="바코드번호를 입력하세요.">-->
+        <!--                </form>-->
+        <!--            </div>-->
+        <!--            <button role="button" id="btn-search" class="btn btn-primary">조회</button>-->
+        <!--        </div>-->
+        <div class="unit-function">
+            <h3>상품등록</h3>
+            <a href="/product/register" role="button" class="btn btn-secondary">등록</a>
+        </div>
+        <div class="unit-function">
+            <h3>입고 & 출고</h3>
+            <div class="row-group">
+                <div class="half-form-group">
+                    <a role="button" class="btn" style="background-color: blue; width: 200px; color: #f2f2f2"
+                       href="/product/in-out/in">입고
+                    </a>
+                </div>
+                <div class="half-form-group">
+                    <a role="button" class="btn" style="background-color: red; width: 200px; color: #f2f2f2"
+                       href="/product/in-out/out">출고</a>
+                </div>
+            </div>
+        </div>
+        <!--        <div class="unit-function">-->
+        <!--            <h3>재고 상품 리스트</h3>-->
+        <!--            <a href="/product/in-stock" role="button" class="btn btn-secondary">확인</a>-->
+        <!--        </div>-->
+        <!--        <div class="unit-function">-->
+        <!--            <h3>등록상품리스트</h3>-->
+        <!--            <a href="/product/list" role="button" class="btn btn-secondary">확인</a>-->
+        <!--        </div>-->
+        <div class="unit-function">
+            <h3>상품 검색</h3>
+            <a href="/product/search" role="button" class="btn btn-secondary">검색</a>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="/js/app/barcodeSearch.js"></script>
+</body>
+</html>

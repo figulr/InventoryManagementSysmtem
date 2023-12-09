@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>PMS</title>
+    <!-- Bootstrap -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <link th:href="@{/css/essential.css}" rel="stylesheet">
+</head>
+<body>
+<div>
+    <div class="header-logo" th:replace="fragments/header.html :: logo"></div>
+    <div class="header-btn">
+        <div th:replace="fragments/header.html :: logout"></div>
+        <hr>
+    </div>
+</div>
+<div class="col-md-12">
+    <div class="col-md-4">
+        <form>
+            <div class="form-group">
+                <label for="id">id</label>
+                <input type="text" class="form-control" id="id" th:value="${product.id}" readonly>
+            </div>
+            <div class="form-group">
+                <label for="barcodeId">barcode</label>
+                <input type="text" class="form-control" id="barcodeId" th:value="${product.barcodeId}" readonly>
+            </div>
+            <div class="form-group">
+                <label for="productName">Product Name</label>
+                <input type="text" class="form-control" id="productName" th:value="${product.productName}">
+            </div>
+            <div class="form-group">
+                <label for="brand">brand</label>
+                <input type="text" class="form-control" id="brand" th:value="${product.brand}">
+            </div>
+            <div class="form-group">
+                <label for="price">price</label>
+                <input type="text" class="form-control" id="price" th:value="${product.price}">
+            </div>
+            <div class="form-group">
+                <label for="weight">weight</label>
+                <input type="text" class="form-control" id="weight" th:value="${product.weight}">
+            </div>
+            <div class="form-group">
+                <label for="volumeLong">volume long</label>
+                <input type="text" class="form-control" id="volumeLong" th:value="${product.volumeLong}">
+            </div>
+            <div class="form-group">
+                <label for="volumeShort">volume short</label>
+                <input type="text" class="form-control" id="volumeShort" th:value="${product.volumeShort}">
+            </div>
+            <div class="form-group">
+                <label for="volumeHeight">volume height</label>
+                <input type="text" class="form-control" id="volumeHeight" th:value="${product.volumeHeight}">
+            </div>
+
+        </form>
+        <a href="/" role="button" class="btn btn-secondary">취소</a>
+        <button role="button" class="btn btn-primary" id="btn-update">수정</button>
+        <button role="button" class="btn btn-danger" id="btn-delete">삭제</button>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="/js/app/index.js"></script>
+</body>
+</html>

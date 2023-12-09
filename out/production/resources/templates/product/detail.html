@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title th:text="${product.productName}"></title>
+    <!-- Bootstrap -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <link th:href="@{/css/essential.css}" rel="stylesheet">
+</head>
+<body>
+<div class="header-logo" th:replace="fragments/header.html :: logo"></div>
+<div class="header-btn">
+    <span th:text="${userName}" id="user"></span>
+    <span th:replace="fragments/header.html :: logout"></span>
+    <hr>
+</div>
+
+<div class="body-content" th:if="${product.registered eq false}">
+    <div class="unit-function error">
+        <p>등록되지 않은 바코드입니다.</p>
+    </div>
+    <div class="unit-function">
+        <h3>다른 상품 조회</h3>
+        <div class="form-group">
+            <form>
+                <span class="label">바코드</span>
+                <input type="text" class="input-register" id="barcodeId" placeholder="바코드번호를 입력하세요.">
+            </form>
+        </div>
+        <button role="button" id="btn-search" class="btn btn-primary">조회</button>
+    </div>
+    <div class="unit-function">
+        <h3>상품등록</h3>
+        <a href="/product/register" role="button" class="btn btn-secondary">등록</a>
+    </div>
+    <div class="unit-function">
+        <h3>상품 상세 검색</h3>
+        <a href="/product/search" role="button" class="btn btn-secondary">검색</a>
+    </div>
+</div>
+</div>
+<div th:if="${product.registered}" class="body-content">
+    <div class="unit-function">
+        <h3>상품 정보</h3>
+        <form>
+            <div class="form-group">
+                <span class="label">제품등록번호</span>
+                <input type="text" class="input-register" id="id" th:value="${product.id}" disabled="disabled">
+            </div>
+            <div class="form-group">
+                <span class="label">바코드 번호</span>
+                <input type="text" class="input-register" id="barcodeId" th:value="${product.barcodeId}"
+                       disabled="disabled">
+            </div>
+            <div class="form-group">
+                <span class="label">제품명</span>
+                <input type="text" class="input-register" id="productName" th:value="${product.productName}">
+            </div>
+            <div class="form-group">
+                <span class="label">브랜드</span>
+                <input type="text" class="input-register" id="brand" th:value="${product.brand}">
+            </div>
+            <div class="form-group">
+                <span class="label">무게</span>
+                <input type="text" class="input-register" id="weight" th:value="${product.weight}">
+            </div>
+            <div class="form-group">
+                <span class="label">긴 밑면 길이</span>
+                <input type="text" class="input-register" id="volumeLong" th:value="${product.volumeLong}">
+            </div>
+            <div class="form-group">
+                <span class="label">짧은 밑면 길이</span>
+                <input type="text" class="input-register" id="volumeShort" th:value="${product.volumeShort}">
+            </div>
+            <div class="form-group">
+                <span class="label">상품 높이</span>
+                <input type="text" class="input-register" id="volumeHeight" th:value="${product.volumeHeight}">
+            </div>
+        </form>
+        <div>
+            <button role="button" class="btn btn-primary" id="btn-update">상품 정보 수정</button>
+            <br>
+            <br>
+        </div>
+        <hr>
+        <h3>가격 정보</h3>
+        <div class="form-group">
+            <span class="label">현재 가격</span>
+            <input type="text" class="input-register" id="price" th:value="${product.price}" readonly>
+        </div>
+        <div th:if="${priceList}" class="form-group">
+            <span class="label">가격 이력</span>
+            <div class="input-register">
+                <table style="width: 100%;">
+                    <thead>
+                    <tr>
+                        <th style="width: 50%">가격이력</th>
+                        <th style="width: 50%">등록날짜</th>
+                    </tr>
+                    </thead>
+                    <tbody th:each="pl : ${priceList}">
+                    <tr>
+                        <td th:text="${pl.updatedPrice}"></td>
+                        <td th:text="${pl.createdDate}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="form-group">
+            <span class="label">가격 수정</span>
+            <input type="number" min="0" class="input-register" id="updatedPrice" placeholder="새로운 가격을 입력해주세요.">
+        </div>
+        <div>
+            <button role="button" class="btn btn-primary" id="btn-price-update">가격 수정</button>
+            <hr>
+        </div>
+        <h3>재고 관리</h3>
+        <div class="form-group">
+            <span class="label">재고</span>
+            <input type="number" class="input-register" id="inStock" readonly th:value="${stock.inStock}">
+            <br>
+            <br>
+            <div class="row-group">
+                <div class="half-form-group">
+                    <p class="label stock-text">입고</p>
+                    <input type="number" min="1" value="1" class="input-register" id="stockAdd">
+                    <button role="button" class="btn btn-primary" id="btn-stock-in">입고 확인</button>
+                </div>
+                <div class="half-form-group">
+                    <p class="label stock-text">출고</p>
+                    <input type="number" min="1" class="input-register" id="stockSub" value="1">
+                    <button role="button" class="btn btn-danger" id="btn-stock-out">출고 확인</button>
+                </div>
+            </div>
+        </div>
+        </form>
+        <hr>
+        <div class="unit-function">
+            <h3>다른 상품 조회</h3>
+            <div class="form-group">
+                <form>
+                    <label for="search-barcodeId">바코드</label>
+                    <input type="text" id="search-barcodeId"
+                           oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                           placeholder="바코드번호를 입력하세요.">
+                </form>
+            </div>
+            <button role="button" id="btn-search" class="btn btn-primary">조회</button>
+        </div>
+        <button role="button" class="btn btn-secondary" id="btn-delete">삭제</button>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="/js/app/stockRegister.js"></script>
+<script src="/js/app/priceUpdate.js"></script>
+<script src="/js/app/update.js"></script>
+<script src="/js/app/barcodeSearch.js"></script>
+</body>
+</html>

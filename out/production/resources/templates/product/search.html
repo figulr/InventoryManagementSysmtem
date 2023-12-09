@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>PMS</title>
+
+    <!-- Bootstrap -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <link th:href="@{/css/essential.css}" rel="stylesheet">
+</head>
+<body>
+<div>
+    <div class="header-logo" th:replace="fragments/header.html :: logo"></div>
+    <div class="header-btn">
+        <div th:replace="fragments/header.html :: logout"></div>
+        <hr>
+    </div>
+</div>
+<div class="body-content">
+    <div class>
+        <div class="unit-function">
+            <h3>상품 검색</h3>
+            <form action="/product/search.api" method="GET">
+                <div class="form-group">
+                    <select id="searchType" name="searchType">
+                        <option value="productName">제품명</option>
+                        <option value="brand">브랜드</option>
+                    </select>
+                    <input type="text" name="searchValue" id="searchValue">
+                </div>
+                <button role="button" type="submit" id="btn-search" class="btn btn-primary">검색</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="/js/app/index.js"></script>
+<script src="/js/app/keywordSearch.js"></script>
+</body>
+</html>

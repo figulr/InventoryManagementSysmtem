@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<!--      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">-->
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>PMS</title>
+    <!-- Bootstrap -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <link th:href="@{/css/essential.css}" rel="stylesheet">
+</head>
+<body>
+<div>
+    <div class="header-logo" th:replace="fragments/header.html :: logo"></div>
+    <div class="header-btn">
+        <span th:text="${userName}" id="user" th:value="${userName}"><span
+                th:replace="fragments/header.html :: logout"></span></span>
+        <hr>
+    </div>
+</div>
+<div class="body-content">
+    <h2>ERROR</h2>
+    <div class="form-group">
+        <p th:text="${errorMessage}"></p>
+    </div>
+    <div class="form-group">
+        <a href="/" class="btn btn-primary">홈</a>
+    </div>
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="/js/app/barcodeSearch.js"></script>
+</body>
+</html>
