@@ -51,7 +51,7 @@ var main = {
         countedProduct = 0;
         var _this = this;
         $('#searchBarcode').focus();
-        $('#btn-in').on('click', function () {
+        $('#btn-in').off().on('click', function () {
             var mode = $('#mode').val();
             var barcode = Number($('#searchBarcode').val());
             if (barcode == 0 | !barcode) {
@@ -64,7 +64,7 @@ var main = {
                 }
             }
         });
-        $('#searchBarcode').on('keyup', function (key) {
+        $('#searchBarcode').off().on('keyup', function (key) {
             if (key.keyCode == 13) {
                 var barcode = $('#searchBarcode').val();
                 if (Number(barcode) == 0 | !barcode) {
@@ -127,6 +127,7 @@ var main = {
                 url: '/api/v1/stock/check/' + barcode,
                 dataType: 'json',
                 contentType: 'application/json; charset=utf-8',
+                async: false,
             }).done(function (response) {
                 if (response.id != null) {
                     let product = {
@@ -207,6 +208,7 @@ var main = {
                 url: '/api/v1/stock/check/' + barcode,
                 dataType: 'json',
                 contentType: 'application/json; charset=utf-8',
+                async: false,
             }).done(function (response) {
                 if (response.id != null) {
                     let product = {
