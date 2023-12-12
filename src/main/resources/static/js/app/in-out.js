@@ -40,64 +40,10 @@ function deleteRow(l) {
     $('#searchBarcode').focus();
 }
 
-var main = {
+var stockModule = {
     /*
-    Script 로드시 실행시킬 함수이다.
-    페이지에서 발생하는 이벤트를 리스닝 중이다.
-     */
-    init: function () {
-        i = 0;
-        barcodeList = [];
-        countedProduct = 0;
-        var _this = this;
-        $('#searchBarcode').focus();
-        $('#btn-in').off().on('click', function () {
-            var mode = $('#mode').val();
-            var barcode = Number($('#searchBarcode').val());
-            if (barcode == 0 | !barcode) {
-                alert("바코드를 입력해주세요.");
-            } else {
-                if ($('#mode').html() == 'in') {
-                    _this.intoListingForIn(barcode);
-                } else {
-                    _this.intoListingForOut(barcode);
-                }
-            }
-        });
-        $('#searchBarcode').off().on('keyup', function (key) {
-            if (key.keyCode == 13) {
-                var barcode = $('#searchBarcode').val();
-                if (Number(barcode) == 0 | !barcode) {
-                    alert("바코드를 입력해주세요.");
-                    $('#searchBarcode').val('');
-                    $('#searchBarcode').focus();
-                } else {
-                    if ($('#mode').html() == 'in') {
-                        _this.intoListingForIn(barcode);
-                    } else {
-                        _this.intoListingForOut(barcode);
-                    }
-                }
-            }
-        });
-        $('#btn-in-complete').on('click', function () {
-            if (countedProduct - countedHidden > 0) {
-                _this.intoOperation();
-            } else {
-                alert("입고할 상품이 없습니다.");
-            }
-        });
-        $('#btn-out-complete').on('click', function () {
-            if (countedProduct - countedHidden > 0) {
-                _this.outtoOperation();
-            } else {
-                alert("출고할 상품이 없습니다.");
-            }
-        });
-    },
-    /*
-    입고진행 시 상품 조회 후 리스트에 상품을 추가하는 함수이다.
-     */
+   입고진행 시 상품 조회 후 리스트에 상품을 추가하는 함수이다.
+    */
     intoListingForIn: function (barcode) {
         var checked = false;
         if (i > 0) {
@@ -372,6 +318,62 @@ var main = {
                 alert(JSON.stringify(error));
             })
         }
+    }
+}
+
+var main = {
+    /*
+    Script 로드시 실행시킬 함수이다.
+    페이지에서 발생하는 이벤트를 리스닝 중이다.
+     */
+    init: function () {
+        i = 0;
+        barcodeList = [];
+        countedProduct = 0;
+        $('#searchBarcode').focus();
+        $('#btn-in').on('click', function () {
+            var mode = $('#mode').val();
+            var barcode = Number($('#searchBarcode').val());
+            if (barcode == 0 | !barcode) {
+                alert("바코드를 입력해주세요.");
+            } else {
+                if ($('#mode').html() == 'in') {
+                    stockModule.intoListingForIn(barcode);
+                } else {
+                    stockModule.intoListingForOut(barcode);
+                }
+            }
+        });
+        $('#searchBarcode').on('keyup', function (key) {
+            if (key.keyCode == 13) {
+                var barcode = $('#searchBarcode').val();
+                if (Number(barcode) == 0 | !barcode) {
+                    alert("바코드를 입력해주세요.");
+                    $('#searchBarcode').val('');
+                    $('#searchBarcode').focus();
+                } else {
+                    if ($('#mode').html() == 'in') {
+                        stockModule.intoListingForIn(barcode);
+                    } else {
+                        stockModule.intoListingForOut(barcode);
+                    }
+                }
+            }
+        });
+        $('#btn-in-complete').on('click', function () {
+            if (countedProduct - countedHidden > 0) {
+                stockModule.intoOperation();
+            } else {
+                alert("입고할 상품이 없습니다.");
+            }
+        });
+        $('#btn-out-complete').on('click', function () {
+            if (countedProduct - countedHidden > 0) {
+                stockModule.outtoOperation();
+            } else {
+                alert("출고할 상품이 없습니다.");
+            }
+        });
     }
 };
 

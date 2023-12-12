@@ -1,8 +1,13 @@
+
+
 var i;
 var barcodeList;
 var countedProduct;
 var countedHidden = 0;
 
+/*
+상품 조회 후 목록 내 상품 수량을 업데이트 하는 함수이다.
+ */
 function valueChange(l) {
     let inStock = Number($('#' + l + '-inStock').html());
     let newInput = Number($('#' + l + '-number').val());
@@ -22,7 +27,9 @@ function valueChange(l) {
     $('#searchBarcode').val('');
     $('#searchBarcode').focus();
 }
-
+/*
+상품 목록에서 상품 제거하는 함수이다.
+ */
 function deleteRow(l) {
     $('#' + l + '-row').attr("hidden", true);
     $('#' + l + '-number').removeAttr("onchange");
@@ -33,59 +40,10 @@ function deleteRow(l) {
     $('#searchBarcode').focus();
 }
 
-
-var main = {
-    init: function () {
-        i = 0;
-        barcodeList = [];
-        countedProduct = 0;
-        var _this = this;
-        $('#searchBarcode').focus();
-        $('#btn-in').on('click', function () {
-            var mode = $('#mode').val();
-            var barcode = Number($('#searchBarcode').val());
-            if (barcode == 0 | !barcode) {
-                alert("바코드를 입력해주세요.");
-            } else {
-                if ($('#mode').html() == 'in') {
-                    _this.intoListingForIn(barcode);
-                } else {
-                    _this.intoListingForOut(barcode);
-                }
-            }
-        });
-        $('#searchBarcode').on('keyup', function (key) {
-            if (key.keyCode == 13) {
-                var barcode = $('#searchBarcode').val();
-                if (Number(barcode) == 0 | !barcode) {
-                    alert("바코드를 입력해주세요.");
-                    $('#searchBarcode').val('');
-                    $('#searchBarcode').focus();
-                } else {
-                    if ($('#mode').html() == 'in') {
-                        _this.intoListingForIn(barcode);
-                    } else {
-                        _this.intoListingForOut(barcode);
-                    }
-                }
-            }
-        });
-        $('#btn-in-complete').on('click', function () {
-            if (countedProduct - countedHidden > 0) {
-                _this.intoOperation();
-            } else {
-                alert("입고할 상품이 없습니다.");
-            }
-        });
-        $('#btn-out-complete').on('click', function () {
-            if (countedProduct - countedHidden > 0) {
-                _this.outtoOperation();
-            } else {
-                alert("출고할 상품이 없습니다.");
-            }
-        });
-    },
-
+var stockModule = {
+    /*
+   입고진행 시 상품 조회 후 리스트에 상품을 추가하는 함수이다.
+    */
     intoListingForIn: function (barcode) {
         var checked = false;
         if (i > 0) {
@@ -115,6 +73,7 @@ var main = {
                 url: '/api/v1/stock/check/' + barcode,
                 dataType: 'json',
                 contentType: 'application/json; charset=utf-8',
+                async: false,
             }).done(function (response) {
                 if (response.id != null) {
                     let product = {
@@ -156,7 +115,9 @@ var main = {
             })
         }
     },
-
+    /*
+    출고진행 시 상품 조회 후 리스트에 상품을 추가하는 함수이다.
+     */
     intoListingForOut: function (barcode) {
         var checked = false;
         if (i > 0) {
@@ -193,6 +154,7 @@ var main = {
                 url: '/api/v1/stock/check/' + barcode,
                 dataType: 'json',
                 contentType: 'application/json; charset=utf-8',
+                async: false,
             }).done(function (response) {
                 if (response.id != null) {
                     let product = {
@@ -237,7 +199,9 @@ var main = {
             })
         }
     },
-
+    /*
+    입고 요청 메서드이다.
+     */
     intoOperation: function () {
         if (confirm("입고를 진행하시겠습니까?")) {
             var data = [];
@@ -295,7 +259,9 @@ var main = {
             })
         }
     },
-
+    /*
+    출고 요청 메서드이다.
+     */
     outtoOperation: function () {
         if (confirm("출고를 진행하시겠습니까?")) {
             var data = [];
@@ -352,6 +318,62 @@ var main = {
                 alert(JSON.stringify(error));
             })
         }
+    }
+}
+
+var main = {
+    /*
+    Script 로드시 실행시킬 함수이다.
+    페이지에서 발생하는 이벤트를 리스닝 중이다.
+     */
+    init: function () {
+        i = 0;
+        barcodeList = [];
+        countedProduct = 0;
+        $('#searchBarcode').focus();
+        $('#btn-in').on('click', function () {
+            var mode = $('#mode').val();
+            var barcode = Number($('#searchBarcode').val());
+            if (barcode == 0 | !barcode) {
+                alert("바코드를 입력해주세요.");
+            } else {
+                if ($('#mode').html() == 'in') {
+                    stockModule.intoListingForIn(barcode);
+                } else {
+                    stockModule.intoListingForOut(barcode);
+                }
+            }
+        });
+        $('#searchBarcode').on('keyup', function (key) {
+            if (key.keyCode == 13) {
+                var barcode = $('#searchBarcode').val();
+                if (Number(barcode) == 0 | !barcode) {
+                    alert("바코드를 입력해주세요.");
+                    $('#searchBarcode').val('');
+                    $('#searchBarcode').focus();
+                } else {
+                    if ($('#mode').html() == 'in') {
+                        stockModule.intoListingForIn(barcode);
+                    } else {
+                        stockModule.intoListingForOut(barcode);
+                    }
+                }
+            }
+        });
+        $('#btn-in-complete').on('click', function () {
+            if (countedProduct - countedHidden > 0) {
+                stockModule.intoOperation();
+            } else {
+                alert("입고할 상품이 없습니다.");
+            }
+        });
+        $('#btn-out-complete').on('click', function () {
+            if (countedProduct - countedHidden > 0) {
+                stockModule.outtoOperation();
+            } else {
+                alert("출고할 상품이 없습니다.");
+            }
+        });
     }
 };
 
