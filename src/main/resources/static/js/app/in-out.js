@@ -60,6 +60,7 @@ var stockModule = {
                         countedHidden = countedHidden - 1;
                     }
                     $('#searchBarcode').val('');
+                    $('#searchBarcode').focus();
                     checked = true;
                 } else {
                     continue;
@@ -105,13 +106,16 @@ var stockModule = {
                     i++;
                     countedProduct++;
                     $('#searchBarcode').val('');
+                    $('#searchBarcode').focus();
                 } else {
                     alert("등록되어 있지 않은 상품입니다.");
                     $('#searchBarcode').val('');
+                    $('#searchBarcode').focus();
                 }
             }).fail(function () {
                 alert("다시 시도해 주십시오.");
                 $('#searchBarcode').val('');
+                $('#searchBarcode').focus();
             })
         }
     },
@@ -336,6 +340,8 @@ var main = {
             var barcode = Number($('#searchBarcode').val());
             if (barcode == 0 | !barcode) {
                 alert("바코드를 입력해주세요.");
+                $('#searchBarcode').val('');
+                $('#searchBarcode').focus();
             } else {
                 if ($('#mode').html() == 'in') {
                     stockModule.intoListingForIn(barcode);
@@ -365,6 +371,8 @@ var main = {
                 stockModule.intoOperation();
             } else {
                 alert("입고할 상품이 없습니다.");
+                $('#searchBarcode').val('');
+                $('#searchBarcode').focus();
             }
         });
         $('#btn-out-complete').on('click', function () {
@@ -372,6 +380,8 @@ var main = {
                 stockModule.outtoOperation();
             } else {
                 alert("출고할 상품이 없습니다.");
+                $('#searchBarcode').val('');
+                $('#searchBarcode').focus();
             }
         });
     }
